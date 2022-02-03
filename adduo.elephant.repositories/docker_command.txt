@@ -1,0 +1,2 @@
+﻿docker run --name elephant-db -v c:/mysql-data/elephant/users:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
+2b620e128d14b102b2b4f3f9f34a3fa70ef32b649c08ca3ba0796875e2e0893e
