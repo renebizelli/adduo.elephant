@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace adduo.elephant.domain.entities.debts
 {
@@ -10,16 +9,5 @@ namespace adduo.elephant.domain.entities.debts
         public int InComeId { get; private set; }
 
         public virtual List<SpreadSheetItem> Items { get; private set; } = new List<SpreadSheetItem>();
-
-        public ItemDebt() : base()
-        {
-
-        }
-
-        public ItemDebt(Guid id, string name, decimal value, int categoryId, DebtStatuses status, int inComeId, int dueDay) : base(id, name, value, categoryId, status)
-        {
-            InComeId = inComeId;
-            DueDay = dueDay;
-        }
     }
 }

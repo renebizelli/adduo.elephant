@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adduo.elephant.domain", "ad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adduo.elephant.domain.ioc", "adduo.elephant.domain.ioc\adduo.elephant.domain.ioc.csproj", "{B67B4CD5-59C3-4C94-9547-E52634E34E30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adduo.elephant.test", "adduo.elephant.test\adduo.elephant.test.csproj", "{48B47BEA-074E-4386-ADB5-9EBA2C060D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B67B4CD5-59C3-4C94-9547-E52634E34E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B67B4CD5-59C3-4C94-9547-E52634E34E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B67B4CD5-59C3-4C94-9547-E52634E34E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B47BEA-074E-4386-ADB5-9EBA2C060D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B47BEA-074E-4386-ADB5-9EBA2C060D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B47BEA-074E-4386-ADB5-9EBA2C060D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B47BEA-074E-4386-ADB5-9EBA2C060D26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

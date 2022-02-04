@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace adduo.elephant.domain.entities
 {
-    public class InCome : EntityItem<int>
+    public class Tag : EntityItem<int>
     {
-        public InCome(int id, string name) 
+        public virtual ICollection<Debt> Debts { get; private set; }
+        
+        public Tag(int id, string name) 
         {
             Id = id;
             Name = name;
         }
 
-        public virtual ICollection<ItemDebt> ItemDebts { get; set; }
     }
 }

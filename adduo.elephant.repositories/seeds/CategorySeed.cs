@@ -3,25 +3,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace adduo.elephant.repositories.seeds
 {
-    public class CategorySeed 
+    public class CategorySeed
     {
-        public Category[] Categories = new Category[]
+        public Tag[] Categories = new Tag[]
         {
-            new Category( 1, "Pais"),
-            new Category( 2, "Saúde"),
-            new Category( 3, "Celular"),
-            new Category( 4, "Cartão de Crédito"),
-            new Category( 5, "Unique"),
-            new Category( 6, "Reservas"),
-            new Category( 7, "Estudos"),
-            new Category( 8, "Adduo"),
-            new Category( 9, "Avulso"),
-            new Category( 10, "Santander"),
+            //new Tag() { Id = 1, Name = "Pais"},
+            //new Tag() { Id =2,  Name = "Saúde"},
+            //new Tag() { Id =3,  Name = "Celular"},
+            //new Tag() { Id =4,  Name = "Cartão de Crédito"},
+            //new Tag() { Id =5,  Name = "Unique"},
+            //new Tag() { Id =6,  Name = "Reservas"},
+            //new Tag() { Id =7,  Name = "Estudos"},
+            //new Tag() { Id =8,  Name = "Adduo"},
+            //new Tag() { Id =9,  Name = "Avulso"},
+            //new Tag() { Id =10, Name =  "Santander"},
         };
 
         public CategorySeed(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().HasData(Categories);
+            modelBuilder.Entity<Tag>().HasData(Categories);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using adduo.elephant.utilities.entries;
 using adduo.elephant.utilities.entries.entry_validators;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace adduo.elephant.domain.requests
 {
@@ -9,25 +11,25 @@ namespace adduo.elephant.domain.requests
         public Guid Id { get; set; }
         public NameEntry Name { get; set; }
         public DecimalEntry Value { get; set; }
-        public IntEntry CategoryId { get; set; }
+        public ListEntry<int> Tags { get; set; }
 
         public override void AddEntries()
         {
             AddEntry(Name);
             AddEntry(Value);
-            AddEntry(CategoryId);
+            AddEntry(Tags);
         }
 
         public override void InitEntries()
         {
             Name = new NameEntry();
             Value = new DecimalEntry();
-            CategoryId = new IntEntry();
+            Tags = new ListEntry<int>();
         }
 
         public override void AddValidators()
         {
-            CategoryId.AddValidation(new IntNotZero());
+            Tags.AddValidation(new NotEmptyList<int>());
             Value.AddValidation(new DecimalNotZero());
         }
     }

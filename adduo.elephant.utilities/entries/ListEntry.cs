@@ -1,20 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace adduo.elephant.utilities.entries
 {
-    public class ListEntry<T> : Entry
+    public class ListEntry<T> : Entry<List<T>>
     {
-        [JsonPropertyName("list")]
-        public List<T> List { get; set; }
-
-        [JsonPropertyName("defaultList")]
-        public List<T> ListDefault { get; set; }
-
         public ListEntry()
         {
-            List = new List<T>();
-            ListDefault = new List<T>();
+            Value = new List<T>();
+            DefaultValue = new List<T>();
         }
     }
 }

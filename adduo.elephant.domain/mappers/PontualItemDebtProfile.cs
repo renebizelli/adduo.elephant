@@ -12,7 +12,7 @@ namespace adduo.elephant.domain.mappers
                .ForMember(d => d.Id, a => a.Ignore())
                .ForMember(d => d.Value, a => a.MapFrom(src => src.Value.Value))
                .ForMember(d => d.Name, a => a.MapFrom(src => src.Name.Value))
-               .ForMember(d => d.CategoryId, a => a.MapFrom(src => src.CategoryId.GetValue()));
+               .ForMember(d => d.Tags, a => a.MapFrom(src => src.Tags.Value));
 
             CreateMap<ItemDebtRequest, ItemDebt>()
                 .IncludeBase<DebtRequest, Debt>()
@@ -23,15 +23,6 @@ namespace adduo.elephant.domain.mappers
                 .IncludeBase<ItemDebtRequest, ItemDebt>()
                 .ForMember(d => d.Month, a => a.MapFrom(src => src.Month.GetValue()))
                 .ForMember(d => d.Year, a => a.MapFrom(src => src.Year.GetValue()));
-
-            //CreateMap<PontualItemDebtRequest, PontualItemDebt>()
-            //   .ForMember(d => d.Id, a => a.MapFrom(src => src.Id))
-            //   .ForMember(d => d.Value, a => a.MapFrom(src => src.Value.Value))
-            //   .ForMember(d => d.CategoryId, a => a.MapFrom(src => src.CategoryId.Value))
-            //   .ForMember(d => d.DueDay, a => a.MapFrom(src => src.DueDay.Value))
-            //   .ForMember(d => d.InComeId, a => a.MapFrom(src => src.InComeId.Value))
-            //   .ForMember(d => d.Month, a => a.MapFrom(src => src.Month.Value))
-            //   .ForMember(d => d.Year, a => a.MapFrom(src => src.Year.Value));
         }
     }
 }

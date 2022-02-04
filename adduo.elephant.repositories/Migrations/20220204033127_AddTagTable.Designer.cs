@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using adduo.elephant.repositories;
 
 namespace adduo.elephant.repositories.Migrations
 {
     [DbContext(typeof(ElephantContext))]
-    partial class ElephantContextModelSnapshot : ModelSnapshot
+    [Migration("20220204033127_AddTagTable")]
+    partial class AddTagTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -20,10 +20,6 @@ namespace adduo.elephant.repositories.configurations
             builder.Property(p => p.Status)
                 .HasColumnType("tinyint")
                 .IsRequired();
-
-            builder.HasOne(p => p.Category)
-                .WithMany(m => m.Debts)
-                .HasForeignKey(f => f.CategoryId);
         }
     }
 }
