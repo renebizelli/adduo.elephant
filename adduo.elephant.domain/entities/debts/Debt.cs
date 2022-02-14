@@ -9,15 +9,34 @@ namespace adduo.elephant.domain.entities.debts
         Inactive
     }
 
-    public abstract class Debt : EntityItem<Guid>
+    public class Debt : EntityItem<Guid>
     {
-        public decimal Value { get; protected set; }
-        public virtual ICollection<Tag> Tags { get; private set; }
+        public decimal Amount { get; set; }
+        public virtual List<Tag> Tags { get; set; } = new List<Tag>();
         public DebtStatuses Status { get; private set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public Debt() : base()
+        {
+
+        }
+
+        public Debt(Guid id, string name, decimal amount) : base(id, name)
+        {
+            Amount = amount;
+
+            Activate();
+        }
 
         public void Activate()
         {
             Status = DebtStatuses.Active;
+        }
+
+        public void AddTag(int tagId)
+        {
+            Tags.Add(new Tag(tagId));
         }
     }
 }

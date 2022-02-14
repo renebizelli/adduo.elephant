@@ -17,7 +17,7 @@ namespace adduo.elephant.repositories.configurations
                 .WithMany(m => m.ItemDebts)
                 .HasForeignKey(f => f.InComeId);
 
-            builder.HasMany(m => m.Items)
+            builder.HasMany(m => m.SpreadSheetItems)
                 .WithOne(o => o.ItemDebt)
                 .HasForeignKey(f => f.ItemDebtId);
         }

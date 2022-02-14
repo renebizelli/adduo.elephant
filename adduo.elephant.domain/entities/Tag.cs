@@ -6,12 +6,14 @@ namespace adduo.elephant.domain.entities
     public class Tag : EntityItem<int>
     {
         public virtual ICollection<Debt> Debts { get; private set; }
-        
-        public Tag(int id, string name) 
+
+        public Tag(int id) : base(id)
         {
-            Id = id;
-            Name = name;
+
         }
 
+        public Tag(int id, string name) : base(id, name)
+        {
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace adduo.elephant.repositories.configurations
             builder.HasKey(p => p.Id);
 
             builder.HasOne(o => o.ItemDebt)
-                .WithMany(m => m.Items)
+                .WithMany(m => m.SpreadSheetItems)
                 .HasForeignKey(f => f.ItemDebtId);
 
             builder.HasOne(o => o.SpreadSheet)

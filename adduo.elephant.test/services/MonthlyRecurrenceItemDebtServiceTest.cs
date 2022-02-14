@@ -7,12 +7,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services
 {
-    public class PontualServiceTest : DebtServiceTest<PontualItemDebtRequest, PontualItemDebt, PontualItemDebtProfile>
+    public class MonthlyRecurrenceItemDebtServiceTest : DebtServiceTest<MonthlyRecurrenceItemDebtRequest, MonthlyRecurrenceItemDebt, MonthlyRecurrenceItemDebtProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<PontualItemDebtRequest>();
+            var request = new Mock<MonthlyRecurrenceItemDebtRequest>();
             request.Object.Tags = new utilities.entries.ListEntry<int>();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);

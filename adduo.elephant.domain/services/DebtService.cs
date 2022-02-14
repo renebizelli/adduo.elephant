@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace adduo.elephant.domain.services
 {
-    public abstract class DebtService<TRequest, TEntity> : IDebtService<TRequest, TEntity>
+    public class DebtService<TRequest, TEntity> : IDebtService<TRequest, TEntity>
                 where TRequest : DebtRequest
                 where TEntity : Debt
     {
@@ -27,11 +27,11 @@ namespace adduo.elephant.domain.services
         {
             request.Validate();
 
-            if(request.AllAreValid())
+            if(request.AllFieldsAreValid())
             {
                 request.Id = Guid.NewGuid();
 
-                var entity = mapper.Map<TRequest, TEntity>(request);
+                var entity = mapper.Map<TEntity>(request);
 
                 entity.Activate();
 

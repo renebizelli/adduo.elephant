@@ -1,8 +1,6 @@
 ﻿using adduo.elephant.utilities.entries;
 using adduo.elephant.utilities.entries.entry_validators;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace adduo.elephant.domain.requests
 {

@@ -14,7 +14,12 @@ namespace adduo.elephant.repositories.configurations
 
             base.Configure(builder);
 
-            builder.Property(p => p.Value)
+            builder.Property(p => p.CreatedAt)
+                .HasColumnType("DateTime")
+                .IsRequired();
+
+            builder.Property(p => p.Amount)
+                .HasColumnType("Decimal(18,2)")
                 .IsRequired();
 
             builder.Property(p => p.Status)

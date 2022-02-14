@@ -26,12 +26,10 @@ namespace adduo.elephant.repositories
 
         public ElephantContext()
         {
-            //Database.EnsureCreated();
         }
 
         public ElephantContext(DbContextOptions<ElephantContext> options) : base(options)
         {
-            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,9 +43,11 @@ namespace adduo.elephant.repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "server=localhost; port=3306; database=elephant; user=root; password=root; Persist Security Info=False; Connect Timeout=300";
-
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = "server=localhost; port=3306; database=elephant; user=root; password=root; Persist Security Info=False; Connect Timeout=300";
+                optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            }
 
             base.OnConfiguring(optionsBuilder);
         }

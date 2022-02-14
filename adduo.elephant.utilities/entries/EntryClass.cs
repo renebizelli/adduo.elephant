@@ -47,7 +47,7 @@ namespace adduo.elephant.utilities.entries
         /// </summary>
         public abstract void InitEntries();
 
-        public void Validate()
+        public virtual void Validate()
         {
             AddEntries();
             AddValidators();
@@ -61,7 +61,7 @@ namespace adduo.elephant.utilities.entries
 
             SetOkHttpStatusCode();
 
-            if(AnyIsInvalid())
+            if(AnyFieldIsInvalid())
             {
                 SetBadRequestHttpStatusCode();
             }
@@ -75,17 +75,17 @@ namespace adduo.elephant.utilities.entries
             }
         }
 
-        public bool AllAreValid()
+        public virtual bool AllFieldsAreValid()
         {
             return Entries.All(a => a.Status == StatusCode.VALID);
         }
 
-        public bool AnyIsValid()
+        public bool AnyFieldIsValid()
         {
             return Entries.Any(a => a.Status == StatusCode.VALID);
         }
 
-        public bool AnyIsInvalid()
+        public bool AnyFieldIsInvalid()
         {
             return Entries.Any(a => a.Status == StatusCode.INVALID);
         }

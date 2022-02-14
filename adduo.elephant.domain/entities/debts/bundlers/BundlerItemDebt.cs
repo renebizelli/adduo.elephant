@@ -6,5 +6,8 @@ namespace adduo.elephant.domain.entities.debts.bundlers
     {
         public virtual MonthyBundlerItemDebt MonthyBundlerItemDebt { get; set; }
         public virtual Guid MonthyBundlerItemDebtId { get; set; }
+        protected BundlerItemDebt(Guid id, string name, decimal amount) : base(id, name, amount)
+        {
+        }
     }
 }
