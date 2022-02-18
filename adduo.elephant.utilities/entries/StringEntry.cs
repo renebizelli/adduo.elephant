@@ -22,7 +22,7 @@ namespace adduo.elephant.utilities.entries
 
         private void AddValidations()
         {
-            AddValidation(new entry_validarions.NotEmpty());
+            AddValidation(new entry_validarions.StringNotEmpty());
             AddValidation(new entry_validarions.SQLInjection());
         }
     }

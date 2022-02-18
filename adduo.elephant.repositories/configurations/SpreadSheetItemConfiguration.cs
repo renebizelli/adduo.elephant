@@ -11,9 +11,9 @@ namespace adduo.elephant.repositories.configurations
             builder.ToTable("spreadsheet_items");
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(o => o.ItemDebt)
+            builder.HasOne(o => o.Item)
                 .WithMany(m => m.SpreadSheetItems)
-                .HasForeignKey(f => f.ItemDebtId);
+                .HasForeignKey(f => f.ItemId);
 
             builder.HasOne(o => o.SpreadSheet)
                 .WithMany(m => m.Items)

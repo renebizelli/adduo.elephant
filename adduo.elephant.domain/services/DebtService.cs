@@ -42,5 +42,32 @@ namespace adduo.elephant.domain.services
 
             return request;
         }
+
+        public async Task<TRequest> UpdateAsync(string id, TRequest request)
+        {
+            var guid = Guid.Empty;
+
+            if(!Guid.TryParse(id, out guid))
+            {
+                throw new ArgumentException("id");
+            }
+
+            request.Validate();
+
+            if (request.AllFieldsAreValid())
+            {
+                request.Id = guid;
+
+                var entity = mapper.Map<TEntity>(request);
+
+                entity.Activate();
+
+                repository.Update(entity);
+
+                await unitOfWork.CommitAsync();
+            }
+
+            return request;
+        }
     }
 }

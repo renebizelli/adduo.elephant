@@ -92,7 +92,7 @@ namespace adduo.elephant.repositories.Migrations
                     b.Property<double>("CurrentValue")
                         .HasColumnType("double");
 
-                    b.Property<Guid>("ItemDebtId")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("char(36)");
 
                     b.Property<double>("PayedValue")
@@ -106,7 +106,7 @@ namespace adduo.elephant.repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemDebtId");
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("SpreadSheetId");
 
@@ -135,9 +135,6 @@ namespace adduo.elephant.repositories.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("Decimal(18,2)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DateTime");
 
@@ -154,7 +151,22 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debts");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.ItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Item", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.Debt");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<Guid>("BundlerMonthlyId")
+                        .HasColumnType("char(36)");
+
+                    b.HasIndex("BundlerMonthlyId");
+
+                    b.ToTable("debt_bundler_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Item", b =>
                 {
                     b.HasBaseType("adduo.elephant.domain.entities.debts.Debt");
 
@@ -169,74 +181,9 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debt_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Installment", b =>
                 {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.Debt");
-
-                    b.Property<Guid>("MonthyBundlerItemDebtId")
-                        .HasColumnType("char(36)");
-
-                    b.HasIndex("MonthyBundlerItemDebtId");
-
-                    b.ToTable("debt_bundler_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.InstallmentsItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.ItemDebt");
-
-                    b.Property<int>("Installments")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartYear")
-                        .HasColumnType("int");
-
-                    b.ToTable("debt_installment_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.MonthlyRecurrenceItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.ItemDebt");
-
-                    b.ToTable("debt_monthly_recurrence_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.MonthyBundlerItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.ItemDebt");
-
-                    b.ToTable("debt_bundler_recurrence_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.PontualItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.ItemDebt");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.ToTable("debt_pontual_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.YearlyRecurrenceItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.ItemDebt");
-
-                    b.Property<int>("DueMonth")
-                        .HasColumnType("int");
-
-                    b.ToTable("debt_yearly_recurrence_items");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.InstallmentsBundlerItemDebt", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt");
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundler_items.Item");
 
                     b.Property<int>("Installments")
                         .HasColumnType("int");
@@ -250,16 +197,16 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debt_bundler_installment_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.MonthlyRecurrenceBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Monthly", b =>
                 {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt");
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundler_items.Item");
 
-                    b.ToTable("debt_bundler_monthly_recurrence_items");
+                    b.ToTable("debt_bundler_monthly_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.PontualBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Pontual", b =>
                 {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt");
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundler_items.Item");
 
                     b.Property<int>("Month")
                         .HasColumnType("int");
@@ -270,14 +217,77 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debt_bundler_pontual_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.YearlyRecurrenceBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Yearly", b =>
                 {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt");
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.bundler_items.Item");
 
                     b.Property<int>("DueMonth")
                         .HasColumnType("int");
 
-                    b.ToTable("debt_bundler_yearly_recurrence_items");
+                    b.ToTable("debt_bundler_yearly_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.Item");
+
+                    b.ToTable("debt_monthly_bundlers");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.ItemAmount", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.Item");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("Decimal(18,2)");
+
+                    b.ToTable("debt_amount_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Installment", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.ItemAmount");
+
+                    b.Property<int>("Installments")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartMonth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartYear")
+                        .HasColumnType("int");
+
+                    b.ToTable("debt_installment_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Monthly", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.ItemAmount");
+
+                    b.ToTable("debt_monthly_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Pontual", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.ItemAmount");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.ToTable("debt_pontual_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Yearly", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.ItemAmount");
+
+                    b.Property<int>("DueMonth")
+                        .HasColumnType("int");
+
+                    b.ToTable("debt_yearly_items");
                 });
 
             modelBuilder.Entity("DebtTag", b =>
@@ -297,9 +307,9 @@ namespace adduo.elephant.repositories.Migrations
 
             modelBuilder.Entity("adduo.elephant.domain.entities.SpreadSheetItem", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", "ItemDebt")
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.Item", "Item")
                         .WithMany("SpreadSheetItems")
-                        .HasForeignKey("ItemDebtId")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -309,16 +319,33 @@ namespace adduo.elephant.repositories.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ItemDebt");
+                    b.Navigation("Item");
 
                     b.Navigation("SpreadSheet");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.ItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Item", b =>
+                {
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.BundlerMonthly", "BundlerMonthly")
+                        .WithMany("Items")
+                        .HasForeignKey("BundlerMonthlyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("adduo.elephant.domain.entities.debts.Debt", null)
+                        .WithOne()
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundler_items.Item", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BundlerMonthly");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Item", b =>
                 {
                     b.HasOne("adduo.elephant.domain.entities.debts.Debt", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.ItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.Item", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -331,100 +358,92 @@ namespace adduo.elephant.repositories.Migrations
                     b.Navigation("InCome");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Installment", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.Debt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.bundler_items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("adduo.elephant.domain.entities.debts.MonthyBundlerItemDebt", "MonthyBundlerItemDebt")
-                        .WithMany("BundlerItemDebts")
-                        .HasForeignKey("MonthyBundlerItemDebtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MonthyBundlerItemDebt");
-                });
-
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.InstallmentsItemDebt", b =>
-                {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", null)
-                        .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.InstallmentsItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundler_items.Installment", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.MonthlyRecurrenceItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Monthly", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.bundler_items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.MonthlyRecurrenceItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundler_items.Monthly", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.MonthyBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Pontual", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.bundler_items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.MonthyBundlerItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundler_items.Pontual", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.PontualItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Yearly", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.bundler_items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.PontualItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundler_items.Yearly", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.YearlyRecurrenceItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.ItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.YearlyRecurrenceItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.BundlerMonthly", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.InstallmentsBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.ItemAmount", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.Item", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundlers.InstallmentsBundlerItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.ItemAmount", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.MonthlyRecurrenceBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Installment", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.ItemAmount", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundlers.MonthlyRecurrenceBundlerItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.Installment", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.PontualBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Monthly", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.ItemAmount", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundlers.PontualBundlerItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.Monthly", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundlers.YearlyRecurrenceBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Pontual", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.bundlers.BundlerItemDebt", null)
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.ItemAmount", null)
                         .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.bundlers.YearlyRecurrenceBundlerItemDebt", "Id")
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.Pontual", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Yearly", b =>
+                {
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.ItemAmount", null)
+                        .WithOne()
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.Yearly", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -439,14 +458,14 @@ namespace adduo.elephant.repositories.Migrations
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.ItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Item", b =>
                 {
                     b.Navigation("SpreadSheetItems");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.MonthyBundlerItemDebt", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
                 {
-                    b.Navigation("BundlerItemDebts");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ namespace adduo.elephant.utilities.entries
     {
         public TextEntry()
         {
-            AddValidation(new entry_validarions.NotEmpty());
+            AddValidation(new entry_validarions.StringNotEmpty());
         }
     }
 

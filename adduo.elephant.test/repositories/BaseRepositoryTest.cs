@@ -21,7 +21,7 @@ namespace adduo.elephant.test.repositories
                                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                                 .Options;
 
-             context = new ElephantContext(options);
+            context = new ElephantContext(options);
 
             context.Database.EnsureCreated();
 

@@ -1,5 +1,6 @@
 ﻿using adduo.elephant.domain.entities.debts;
 using adduo.elephant.domain.requests;
+using System;
 using System.Threading.Tasks;
 
 namespace adduo.elephant.domain.contracts.services
@@ -9,5 +10,6 @@ namespace adduo.elephant.domain.contracts.services
         where TEntity : Debt
     {
         Task<TRequest> SaveAsync(TRequest debt);
+        Task<TRequest> UpdateAsync(string id, TRequest debt);
     }
 }

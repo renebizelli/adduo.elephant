@@ -1,5 +1,6 @@
 ﻿using adduo.elephant.domain.contracts.repositories;
 using adduo.elephant.domain.entities.debts;
+using System;
 using System.Threading.Tasks;
 
 namespace adduo.elephant.repositories.access
@@ -16,6 +17,11 @@ namespace adduo.elephant.repositories.access
         public async Task SaveAsync(T entity)
         {
             await context.Set<T>().AddAsync(entity);
+        }
+
+        public void Update(T entity)
+        {
+            context.Set<T>().Update(entity);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using adduo.elephant.domain.entities.debts;
+﻿using adduo.elephant.domain.entities.debts.items;
 using System;
 
 namespace adduo.elephant.domain.entities
@@ -11,8 +11,8 @@ namespace adduo.elephant.domain.entities
         public SpreadSheetItemStatuses Status { get; private set; }
         public Guid SpreadSheetId { get; private set; }
         public virtual SpreadSheet SpreadSheet { get; private set; }
-        public Guid ItemDebtId { get; private set; }
-        public virtual ItemDebt ItemDebt { get; private set; }
+        public Guid ItemId { get; private set; }
+        public virtual Item Item { get; private set; }
     }
 
     public enum SpreadSheetItemStatuses

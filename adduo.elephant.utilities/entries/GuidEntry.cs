@@ -2,21 +2,30 @@
 
 namespace adduo.elephant.utilities.entries
 {
-    public class GuidEntry : Entry<Guid>
+    public class GuidEntry : Entry<string>
     {
         public GuidEntry(bool newGuid)
         {
-            Value = Guid.Empty;
+            Value = string.Empty;
 
             if (newGuid)
             {
-                Value = Guid.NewGuid();
+                Value = Guid.NewGuid().ToString();
             }
         }
 
         public GuidEntry()
         {
-            Value = Guid.Empty;
+            Value = string.Empty;
+        }
+
+        public Guid GetValue()
+        {
+            var guid = Guid.Empty;
+
+            Guid.TryParse(Value, out guid);
+
+            return guid;
         }
     }
 
