@@ -1,5 +1,6 @@
 ﻿using adduo.elephant.domain.contracts.repositories;
 using adduo.elephant.domain.entities.debts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -12,6 +13,11 @@ namespace adduo.elephant.repositories.access
         public DebtAccess(ElephantContext elephantContext)
         {
             this.context = elephantContext;
+        }
+
+        public Task<T> GetAsync(Guid guid)
+        {
+            return context.Set<T>().Include(i => i.Tags).FirstOrDefaultAsync(f => f.Id.Equals(guid));
         }
 
         public async Task SaveAsync(T entity)

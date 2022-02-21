@@ -58,11 +58,9 @@ namespace adduo.elephant.domain.services
             {
                 request.Id = guid;
 
-                var entity = mapper.Map<TEntity>(request);
+                var entity = await repository.GetAsync(guid);
 
-                entity.Activate();
-
-                repository.Update(entity);
+                mapper.Map<TRequest, TEntity>(request, entity);
 
                 await unitOfWork.CommitAsync();
             }
