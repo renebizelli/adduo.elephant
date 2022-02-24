@@ -24,16 +24,16 @@ namespace adduo.elephant.test.services.scenarios
             var yearly = new domain.entities.debts.items.Yearly(Guid.NewGuid(), "Teste", 10, 1, 2, 3);
             SetMockDbSet<domain.entities.debts.items.Yearly, Guid>(yearly);
 
-            var installmentBundler = new domain.entities.debts.bundler_items.Installment(Guid.NewGuid(), "Teste", 100);
+            var installmentBundler = new domain.entities.debts.bundler_items.Installment(Guid.NewGuid(), "Teste", 100, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Installment, Guid>(installmentBundler);
 
-            var bundlerMonthly = new domain.entities.debts.bundler_items.Monthly(Guid.NewGuid(), "Teste", 10);
+            var bundlerMonthly = new domain.entities.debts.bundler_items.Monthly(Guid.NewGuid(), "Teste", 10, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Monthly, Guid>(bundlerMonthly);
 
-            var pontualBundler = new domain.entities.debts.bundler_items.Pontual(Guid.NewGuid(), "Teste", 100, 1, 2021);
+            var pontualBundler = new domain.entities.debts.bundler_items.Pontual(Guid.NewGuid(), "Teste", 100, 1, 2021, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Pontual, Guid>(pontualBundler);
 
-            var yearlyBundler = new domain.entities.debts.bundler_items.Yearly(Guid.NewGuid(), "Teste", 10, 1);
+            var yearlyBundler = new domain.entities.debts.bundler_items.Yearly(Guid.NewGuid(), "Teste", 10, 1, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Yearly, Guid>(yearlyBundler);
 
             var tags = new List<Tag>

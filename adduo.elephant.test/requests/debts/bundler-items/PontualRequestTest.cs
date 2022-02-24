@@ -14,7 +14,8 @@ namespace adduo.elephant.test.requests.debts.bundler_items
                 DateTime.Now.Millisecond,
                 new System.Collections.Generic.List<int> { 1, 2 },
                 DateTime.Now.Month,
-                DateTime.Now.Year);
+                DateTime.Now.Year,
+                Guid.NewGuid());
 
             request.Validate();
 

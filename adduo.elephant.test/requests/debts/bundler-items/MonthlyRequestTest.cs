@@ -12,7 +12,9 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             var request = HelperDebtBundlerItemsTest.CreateMonthlyRequest(
                             "René Bizelli",
                             DateTime.Now.Millisecond,
-                            new System.Collections.Generic.List<int> { 1, 2 });
+                            new System.Collections.Generic.List<int> { 1, 2 },
+                            Guid.NewGuid());
+                            
 
             request.Validate();
 

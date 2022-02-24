@@ -13,7 +13,8 @@ namespace adduo.elephant.test.requests.debts.bundler_items
                             "René Bizelli",
                             DateTime.Now.Millisecond,
                             new System.Collections.Generic.List<int> { 1, 2 },
-                            DateTime.Now.Month);
+                            DateTime.Now.Month,
+                            Guid.NewGuid());
 
             request.Validate();
 

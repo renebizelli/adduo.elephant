@@ -13,9 +13,10 @@ namespace adduo.elephant.domain.entities.debts.bundler_items
         {
 
         }
-        protected Item(Guid id, string name, decimal amount) : base(id, name)
+        protected Item(Guid id, string name, decimal amount, Guid bundlerMonthlyId) : base(id, name)
         {
             Amount = amount;
+            BundlerMonthlyId = bundlerMonthlyId;
         }
     }
 }

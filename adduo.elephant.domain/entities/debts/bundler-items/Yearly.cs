@@ -11,7 +11,7 @@ namespace adduo.elephant.domain.entities.debts.bundler_items
 
         }
 
-        public Yearly(Guid id, string name, decimal amount, int dueMonth) : base(id, name, amount)
+        public Yearly(Guid id, string name, decimal amount, int dueMonth, Guid bundlerMonthlyId) : base(id, name, amount, bundlerMonthlyId)
         {
             DueMonth = dueMonth;
         }

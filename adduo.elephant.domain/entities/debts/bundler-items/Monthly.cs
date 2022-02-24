@@ -9,7 +9,7 @@ namespace adduo.elephant.domain.entities.debts.bundler_items
 
         }
 
-        public Monthly(Guid id, string name, decimal amount) : base(id, name, amount)
+        public Monthly(Guid id, string name, decimal amount, Guid bundlerMonthlyId) : base(id, name, amount, bundlerMonthlyId)
         { }
     }
 }

@@ -12,7 +12,7 @@ namespace adduo.elephant.domain.entities.debts.bundler_items
 
         }
 
-        public Pontual(Guid id, string name, decimal amount, int month, int year) : base(id, name, amount)
+        public Pontual(Guid id, string name, decimal amount, int month, int year, Guid bundlerMonthlyId) : base(id, name, amount, bundlerMonthlyId)
         {
             Month = month;
             Year = year;

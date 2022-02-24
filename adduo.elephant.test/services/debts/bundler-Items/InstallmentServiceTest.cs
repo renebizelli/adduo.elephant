@@ -42,7 +42,8 @@ namespace adduo.elephant.test.services.debts.bundler_items
                 new List<int> { 3 },
                 DateTime.Now.Month,
                 DateTime.Now.Year,
-                DateTime.Now.Second + 1);
+                DateTime.Now.Second + 1,
+                Guid.NewGuid());
 
             await base.ShoudUpdateEntityBase(installment.Id.ToString(), request);
 
