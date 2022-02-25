@@ -2,7 +2,7 @@
 
 namespace adduo.elephant.domain.entities.debts.bundler_items
 {
-    public class Pontual : Item
+    public class Pontual : ItemAmount
     {
         public int Month { get; private set; }
         public int Year { get; private set; }

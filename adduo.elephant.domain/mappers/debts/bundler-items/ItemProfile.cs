@@ -12,7 +12,6 @@ namespace adduo.elephant.domain.mappers.debts.bundler_items
         {
             CreateMap<ItemRequest, Item>()
                 .IncludeBase<DebtRequest, Debt>()
-                .ForMember(d => d.Amount, a => a.MapFrom(src => src.Value.GetValue()))
                 .ForMember(d => d.BundlerMonthly, a => a.Ignore())
                 .ForMember(d => d.BundlerMonthlyId, a => a.MapFrom(src => src.BundlerMonthly.GetValue()));
         }

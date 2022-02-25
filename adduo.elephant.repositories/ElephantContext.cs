@@ -8,7 +8,7 @@ namespace adduo.elephant.repositories
 {
     public class ElephantContext : DbContext
     {
-        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<InCome> InComes { get; set; }
 
         //public virtual DbSet<Debt> Debts { get; set; }

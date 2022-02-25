@@ -15,7 +15,8 @@ namespace adduo.elephant.domain.mappers.debts
                .ForMember(d => d.Name, a => a.MapFrom(src => src.Name.Value))
                .ForMember(d => d.Status, a => a.Ignore())
                .ForMember(d => d.CreatedAt, a => a.MapFrom(m => DateTime.Now))
-               .ForMember(d => d.Tags, a => a.MapFrom<TagResolver>());
+                .ForMember(d => d.Category, a => a.Ignore())
+               .ForMember(d => d.CategoryId, a => a.MapFrom(src => src.CategoryId.GetValue()));
         }
     }
 }

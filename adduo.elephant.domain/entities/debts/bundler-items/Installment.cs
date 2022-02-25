@@ -2,7 +2,7 @@
 
 namespace adduo.elephant.domain.entities.debts.bundler_items
 {
-    public class Installment : Item
+    public class Installment : ItemAmount
     {
         public int StartMonth { get; private set; }
         public int StartYear { get; private set; }

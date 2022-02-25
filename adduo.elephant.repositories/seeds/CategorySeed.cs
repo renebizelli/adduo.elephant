@@ -5,7 +5,7 @@ namespace adduo.elephant.repositories.seeds
 {
     public class CategorySeed
     {
-        public Tag[] Categories = new Tag[]
+        public Category[] Categories = new Category[]
         {
             //new Tag() { Id = 1, Name = "Pais"},
             //new Tag() { Id =2,  Name = "Saúde"},
@@ -21,7 +21,7 @@ namespace adduo.elephant.repositories.seeds
 
         public CategorySeed(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Tag>().HasData(Categories);
+            modelBuilder.Entity<Category>().HasData(Categories);
         }
     }
 }

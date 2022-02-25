@@ -200,6 +200,11 @@ namespace adduo.elephant.utilities.entries
             Validations.Add(validation);
         }
 
+        public virtual bool HasValue()
+        {
+            return !Value.Equals(default(T));
+        }
+
         public override bool Validate()
         {
             foreach (var validation in Validations)

@@ -28,11 +28,11 @@ namespace adduo.elephant.test.services.debts
         {
             IServiceCollection services = new ServiceCollection();
 
-            var tagRepositoryMock = Mock.Of<IItemRepository<Tag, int>>(_ =>
-                _.Get(It.IsAny<int>()) == new Tag(3)
+            var tagRepositoryMock = Mock.Of<IItemRepository<Category, int>>(_ =>
+                _.Get(It.IsAny<int>()) == new Category(3)
             );
 
-            services.AddTransient<IItemRepository<Tag, int>>(sp => tagRepositoryMock);
+            services.AddTransient<IItemRepository<Category, int>>(sp => tagRepositoryMock);
 
             services.AddAutoMapper(typeof(domain.mappers.debts.DebtProfile));
             services.AddAutoMapper(typeof(domain.mappers.debts.items.ItemProfile));
@@ -98,8 +98,7 @@ namespace adduo.elephant.test.services.debts
         {
             Assert.Equal(request.Name.Value, entity.Name);
             Assert.Equal(DebtStatuses.Active, entity.Status);
-            Assert.Equal(request.Tags.Value.Count, entity.Tags.Count);
-            Assert.Equal(request.Tags.Value.First(), entity.Tags.Select(s=>s.Id).First());
+            Assert.Equal(request.CategoryId.GetValue(), entity.CategoryId);
         }
 
         protected void ItemAssert(domain.requests.debts.items.ItemRequest request, domain.entities.debts.items.Item entity)
@@ -115,8 +114,12 @@ namespace adduo.elephant.test.services.debts
 
         protected void ItemAssert(domain.requests.debts.bundler_items.ItemRequest request, domain.entities.debts.bundler_items.Item entity)
         {
-            Assert.Equal(request.Value.GetValue(), entity.Amount);
             Assert.Equal(request.BundlerMonthly.GetValue(), entity.BundlerMonthlyId);
+        }
+
+        protected void ItemAmountAssert(domain.requests.debts.bundler_items.ItemAmountRequest request, domain.entities.debts.bundler_items.ItemAmount entity)
+        {
+            Assert.Equal(request.Value.GetValue(), entity.Amount);
         }
     }
 }

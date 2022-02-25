@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace adduo.elephant.repositories.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,18 +12,17 @@ namespace adduo.elephant.repositories.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "debts",
+                name: "categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Status = table.Column<sbyte>(type: "tinyint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    Name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_debts", x => x.Id);
+                    table.PrimaryKey("PK_categories", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -58,17 +57,25 @@ namespace adduo.elephant.repositories.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "tags",
+                name: "debts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<sbyte>(type: "tinyint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    Name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tags", x => x.Id);
+                    table.PrimaryKey("PK_debts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_debts_categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -93,31 +100,6 @@ namespace adduo.elephant.repositories.Migrations
                         name: "FK_debt_items_incomes_InComeId",
                         column: x => x.InComeId,
                         principalTable: "incomes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "debts_tags",
-                columns: table => new
-                {
-                    DebtsId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    TagsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_debts_tags", x => new { x.DebtsId, x.TagsId });
-                    table.ForeignKey(
-                        name: "FK_debts_tags_debts_DebtsId",
-                        column: x => x.DebtsId,
-                        principalTable: "debts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_debts_tags_tags_TagsId",
-                        column: x => x.TagsId,
-                        principalTable: "tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -392,9 +374,9 @@ namespace adduo.elephant.repositories.Migrations
                 column: "InComeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_debts_tags_TagsId",
-                table: "debts_tags",
-                column: "TagsId");
+                name: "IX_debts_CategoryId",
+                table: "debts",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_spreadsheet_items_ItemId",
@@ -440,9 +422,6 @@ namespace adduo.elephant.repositories.Migrations
                 name: "debt_yearly_items");
 
             migrationBuilder.DropTable(
-                name: "debts_tags");
-
-            migrationBuilder.DropTable(
                 name: "spreadsheet_items");
 
             migrationBuilder.DropTable(
@@ -450,9 +429,6 @@ namespace adduo.elephant.repositories.Migrations
 
             migrationBuilder.DropTable(
                 name: "debt_amount_items");
-
-            migrationBuilder.DropTable(
-                name: "tags");
 
             migrationBuilder.DropTable(
                 name: "spreadsheets");
@@ -468,6 +444,9 @@ namespace adduo.elephant.repositories.Migrations
 
             migrationBuilder.DropTable(
                 name: "incomes");
+
+            migrationBuilder.DropTable(
+                name: "categories");
         }
     }
 }

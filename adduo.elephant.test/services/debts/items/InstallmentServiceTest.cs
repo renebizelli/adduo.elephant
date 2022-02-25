@@ -20,7 +20,7 @@ namespace adduo.elephant.test.services.debts.items
         public async Task ShoudCallMethodsWhenCallSave()
         {
             var request = new Mock<InstallmentRequest>();
-            request.Object.Tags = new utilities.entries.ListEntry<int>();
+            request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
         }
@@ -29,7 +29,7 @@ namespace adduo.elephant.test.services.debts.items
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
             var request = new Mock<InstallmentRequest>();
-            request.Object.Tags = new utilities.entries.ListEntry<int>();
+            request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
         }
@@ -43,7 +43,7 @@ namespace adduo.elephant.test.services.debts.items
                 "Teste trocado",
                 DateTime.Now.Millisecond,
                 DateTime.Now.Day,
-                new List<int> { 3 },
+                3,
                 DateTime.Now.Millisecond,
                 DateTime.Now.Month,
                 DateTime.Now.Year,
@@ -51,7 +51,7 @@ namespace adduo.elephant.test.services.debts.items
 
             await base.ShoudUpdateEntityBase(installment.Id.ToString(), request);
 
-            var entity = await context.Set<Installment>().Include(i => i.Tags).FirstAsync(f => f.Id == installment.Id);
+            var entity = await context.Set<Installment>().Include(i => i.Category).FirstAsync(f => f.Id == installment.Id);
 
             Assert.Equal(request.StartMonth.GetValue(), entity.StartMonth);
             Assert.Equal(request.StartYear.GetValue(), entity.StartYear);

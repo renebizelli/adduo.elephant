@@ -2,7 +2,7 @@
 
 namespace adduo.elephant.domain.requests.debts.bundler_items
 {
-    public class YearlyRequest : ItemRequest
+    public class YearlyRequest : ItemAmountRequest
     {
         public MonthEntry DueMonth { get; set; }
 

@@ -11,7 +11,8 @@ namespace adduo.elephant.domain.entities.debts
 
     public abstract class Debt : EntityItem<Guid>
     {
-        public virtual List<Tag> Tags { get; set; } = new List<Tag>();
+        public virtual Category Category { get; set; } 
+        public virtual int CategoryId { get; set; }
         public DebtStatuses Status { get; private set; }
         public DateTime CreatedAt { get; set; }
         public Debt()
@@ -27,11 +28,6 @@ namespace adduo.elephant.domain.entities.debts
         public void Activate()
         {
             Status = DebtStatuses.Active;
-        }
-
-        public void AddTag(int tagId)
-        {
-            Tags.Add(new Tag(tagId));
         }
     }
 }

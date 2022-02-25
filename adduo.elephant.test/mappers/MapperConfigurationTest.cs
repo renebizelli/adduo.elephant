@@ -22,6 +22,7 @@ namespace adduo.elephant.test.mappers
                 cfg.AddProfile(new domain.mappers.debts.items.MonthlyBundlerProfile());
 
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemAmountProfile());
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.PontualProfile());
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.InstallmentProfile());
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.MonthlyProfile());

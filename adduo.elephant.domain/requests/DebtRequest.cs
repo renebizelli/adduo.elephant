@@ -8,23 +8,23 @@ namespace adduo.elephant.domain.requests
     {
         public Guid Id { get; set; }
         public NameEntry Name { get; set; }
-        public ListEntry<int> Tags { get; set; }
+        public IntEntry CategoryId { get; set; }
 
         public override void AddEntries()
         {
             AddEntry(Name);
-            AddEntry(Tags);
+            AddEntry(CategoryId);
         }
 
         public override void InitEntries()
         {
             Name = new NameEntry();
-            Tags = new ListEntry<int>();
+            CategoryId = new IntEntry();
         }
 
         public override void AddValidators()
         {
-            Tags.AddValidation(new NotEmptyList<int>());
+            CategoryId.AddValidation(new IntNotZero());
             Name.AddValidation(new StringNotEmpty());
         }
 

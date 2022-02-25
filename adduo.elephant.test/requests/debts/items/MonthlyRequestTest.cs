@@ -13,7 +13,7 @@ namespace adduo.elephant.test.requests.debts.items
                             "René Bizelli",
                             DateTime.Now.Millisecond,
                             DateTime.Now.Day,
-                            new System.Collections.Generic.List<int> { 1, 2 },
+                            1,
                             1);
 
             request.Validate();

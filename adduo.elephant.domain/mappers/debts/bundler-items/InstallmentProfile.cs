@@ -9,7 +9,7 @@ namespace adduo.elephant.domain.mappers.debts.bundler_items
         public InstallmentProfile()  
         {
             CreateMap<InstallmentRequest, Installment>()
-                .IncludeBase<ItemRequest, Item>()
+                .IncludeBase<ItemAmountRequest, ItemAmount>()
                 .ForMember(d => d.StartMonth, a => a.MapFrom(src => src.StartMonth.GetValue()))
                 .ForMember(d => d.StartYear, a => a.MapFrom(src => src.StartYear.GetValue()))
                 .ForMember(d => d.Installments, a => a.MapFrom(src => src.Installments.GetValue()));

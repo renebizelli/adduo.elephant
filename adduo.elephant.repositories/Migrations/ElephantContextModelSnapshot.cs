@@ -17,19 +17,20 @@ namespace adduo.elephant.repositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.13");
 
-            modelBuilder.Entity("DebtTag", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.Category", b =>
                 {
-                    b.Property<Guid>("DebtsId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("TagsId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasKey("DebtsId", "TagsId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
 
-                    b.HasIndex("TagsId");
+                    b.HasKey("Id");
 
-                    b.ToTable("debts_tags");
+                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("adduo.elephant.domain.entities.InCome", b =>
@@ -113,27 +114,14 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("spreadsheet_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("varchar(32)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tags");
-                });
-
             modelBuilder.Entity("adduo.elephant.domain.entities.debts.Debt", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DateTime");
@@ -147,6 +135,8 @@ namespace adduo.elephant.repositories.Migrations
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("debts");
                 });
@@ -227,13 +217,6 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debt_bundler_yearly_items");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
-                {
-                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.Item");
-
-                    b.ToTable("debt_monthly_bundlers");
-                });
-
             modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.ItemAmount", b =>
                 {
                     b.HasBaseType("adduo.elephant.domain.entities.debts.items.Item");
@@ -242,6 +225,13 @@ namespace adduo.elephant.repositories.Migrations
                         .HasColumnType("Decimal(18,2)");
 
                     b.ToTable("debt_amount_items");
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.MonthlyBundler", b =>
+                {
+                    b.HasBaseType("adduo.elephant.domain.entities.debts.items.Item");
+
+                    b.ToTable("debt_monthly_bundlers");
                 });
 
             modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.Installment", b =>
@@ -290,21 +280,6 @@ namespace adduo.elephant.repositories.Migrations
                     b.ToTable("debt_yearly_items");
                 });
 
-            modelBuilder.Entity("DebtTag", b =>
-                {
-                    b.HasOne("adduo.elephant.domain.entities.debts.Debt", null)
-                        .WithMany()
-                        .HasForeignKey("DebtsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("adduo.elephant.domain.entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("adduo.elephant.domain.entities.SpreadSheetItem", b =>
                 {
                     b.HasOne("adduo.elephant.domain.entities.debts.items.Item", "Item")
@@ -324,9 +299,20 @@ namespace adduo.elephant.repositories.Migrations
                     b.Navigation("SpreadSheet");
                 });
 
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.Debt", b =>
+                {
+                    b.HasOne("adduo.elephant.domain.entities.Category", "Category")
+                        .WithMany("Debts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("adduo.elephant.domain.entities.debts.bundler_items.Item", b =>
                 {
-                    b.HasOne("adduo.elephant.domain.entities.debts.items.BundlerMonthly", "BundlerMonthly")
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.MonthlyBundler", "BundlerMonthly")
                         .WithMany("Items")
                         .HasForeignKey("BundlerMonthlyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -394,20 +380,20 @@ namespace adduo.elephant.repositories.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
-                {
-                    b.HasOne("adduo.elephant.domain.entities.debts.items.Item", null)
-                        .WithOne()
-                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.BundlerMonthly", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.ItemAmount", b =>
                 {
                     b.HasOne("adduo.elephant.domain.entities.debts.items.Item", null)
                         .WithOne()
                         .HasForeignKey("adduo.elephant.domain.entities.debts.items.ItemAmount", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.MonthlyBundler", b =>
+                {
+                    b.HasOne("adduo.elephant.domain.entities.debts.items.Item", null)
+                        .WithOne()
+                        .HasForeignKey("adduo.elephant.domain.entities.debts.items.MonthlyBundler", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -448,6 +434,11 @@ namespace adduo.elephant.repositories.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("adduo.elephant.domain.entities.Category", b =>
+                {
+                    b.Navigation("Debts");
+                });
+
             modelBuilder.Entity("adduo.elephant.domain.entities.InCome", b =>
                 {
                     b.Navigation("ItemDebts");
@@ -463,7 +454,7 @@ namespace adduo.elephant.repositories.Migrations
                     b.Navigation("SpreadSheetItems");
                 });
 
-            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.BundlerMonthly", b =>
+            modelBuilder.Entity("adduo.elephant.domain.entities.debts.items.MonthlyBundler", b =>
                 {
                     b.Navigation("Items");
                 });

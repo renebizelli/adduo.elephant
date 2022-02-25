@@ -9,7 +9,7 @@ namespace adduo.elephant.domain.mappers.debts.bundler_items
         public MonthlyProfile() 
         {
             CreateMap<MonthlyRequest, Monthly>()
-                .IncludeBase<ItemRequest, Item>();
+                .IncludeBase<ItemAmountRequest, ItemAmount>();
         }
     }
 }

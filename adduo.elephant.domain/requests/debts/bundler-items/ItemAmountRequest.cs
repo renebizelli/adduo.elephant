@@ -3,29 +3,29 @@ using adduo.elephant.utilities.entries.entry_validators;
 
 namespace adduo.elephant.domain.requests.debts.bundler_items
 {
-    public class ItemRequest : DebtRequest
+    public class ItemAmountRequest : ItemRequest
     {
-        public GuidEntry BundlerMonthly { get; set; }
+        public DecimalEntry Value { get; set; }
 
         public override void AddEntries()
         {
             base.AddEntries();
 
-            AddEntry(BundlerMonthly);
+            AddEntry(Value);
         }
 
         public override void InitEntries()
         {
             base.InitEntries();
-
-            BundlerMonthly = new GuidEntry();
+            
+            Value = new DecimalEntry();
         }
 
         public override void AddValidators()
         {
             base.AddValidators();
-
-            BundlerMonthly.AddValidation(new GuidNotEmpty());
+            
+            Value.AddValidation(new DecimalNotZero());
         }
     }
 }

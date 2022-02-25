@@ -10,8 +10,6 @@ namespace adduo.elephant.repositories.configurations.debts.bundler_items
         {
             builder.ToTable("debt_bundler_items");
 
-            builder.Property(p => p.Amount).IsRequired();
-
             builder.HasOne(o => o.BundlerMonthly)
                 .WithMany(o => o.Items)
                 .HasForeignKey(f => f.BundlerMonthlyId);

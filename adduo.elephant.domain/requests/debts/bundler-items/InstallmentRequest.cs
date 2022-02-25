@@ -4,7 +4,7 @@ using System;
 
 namespace adduo.elephant.domain.requests.debts.bundler_items
 {
-    public class InstallmentRequest : ItemRequest
+    public class InstallmentRequest : ItemAmountRequest
     {
         public MonthEntry StartMonth { get; set; }
         public IntEntry StartYear { get; set; }

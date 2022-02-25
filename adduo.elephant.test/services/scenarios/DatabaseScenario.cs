@@ -36,13 +36,13 @@ namespace adduo.elephant.test.services.scenarios
             var yearlyBundler = new domain.entities.debts.bundler_items.Yearly(Guid.NewGuid(), "Teste", 10, 1, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Yearly, Guid>(yearlyBundler);
 
-            var tags = new List<Tag>
+            var categories = new List<Category>
             {
-                new Tag(1, "AAAAA"),
-                new Tag(2, "BBBBB"),
-                new Tag(3, "BBBBB")
+                new Category(1, "AAAAA"),
+                new Category(2, "BBBBB"),
+                new Category(3, "BBBBB")
             };
-            SetMockDbSet<Tag, int>(tags);
+            SetMockDbSet<Category, int>(categories);
 
             return context.Object;
         }

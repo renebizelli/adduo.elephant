@@ -7,36 +7,31 @@ using System.Collections.Generic;
 
 namespace adduo.elephant.domain.mappers.resolvers
 {
-    public class TagResolver : IValueResolver<DebtRequest, Debt, List<Tag>>
+    public class TagResolver : IValueResolver<DebtRequest, Debt, Category>
     {
-        private readonly IItemRepository<Tag, int> itemRepository;
+        private readonly IItemRepository<Category, int> itemRepository;
 
         public TagResolver()
         {
                 
         }
 
-        public TagResolver(IItemRepository<Tag, int> itemRepository)
+        public TagResolver(IItemRepository<Category, int> itemRepository)
         {
             this.itemRepository = itemRepository;
         }
 
-        public List<Tag> Resolve(DebtRequest source, Debt destination, List<Tag> destMember, ResolutionContext context)
+        public Category Resolve(DebtRequest source, Debt destination, Category destMember, ResolutionContext context)
         {
-            var tags = new List<Tag>();
+            var category = new Category(0);
 
-            foreach (var id in source.Tags.Value)
+            if(source.CategoryId.HasValue())
             {
-                var tag = itemRepository.Get(id);
-
-                if (tag is Tag)
-                {
-                    tags.Add(tag);
-                }
-
+                var id = source.CategoryId.GetValue();
+                category = itemRepository.Get(id);
             }
 
-            return tags;
+            return category;
         }
     }
 }

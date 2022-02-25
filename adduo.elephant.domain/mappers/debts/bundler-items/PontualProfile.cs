@@ -9,7 +9,7 @@ namespace adduo.elephant.domain.mappers.debts.bundler_items
         public PontualProfile()  
         {
             CreateMap<PontualRequest, Pontual>()
-                .IncludeBase<ItemRequest, Item>()
+                .IncludeBase<ItemAmountRequest, ItemAmount>()
                 .ForMember(d => d.Month, a => a.MapFrom(src => src.Month.GetValue()))
                 .ForMember(d => d.Year, a => a.MapFrom(src => src.Year.GetValue()));
         }

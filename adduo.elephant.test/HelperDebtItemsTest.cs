@@ -6,7 +6,7 @@ namespace adduo.elephant.test
 {
     public class HelperDebtItemsTest
     {
-        public static InstallmentRequest CreateInstallmentRequest(string name, decimal value, int dueDay, List<int> tags, int inComeId, int startMonth, int startYear, int installments)
+        public static InstallmentRequest CreateInstallmentRequest(string name, decimal value, int dueDay, int category, int inComeId, int startMonth, int startYear, int installments)
         {
             var request = new InstallmentRequest();
 
@@ -14,54 +14,54 @@ namespace adduo.elephant.test
             request.StartYear = new utilities.entries.IntEntry { Value = startYear.ToString() };
             request.Installments = new utilities.entries.IntEntry { Value = installments.ToString() };
 
-            SetDebt(request, name, tags);
+            SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);
             SetItemAmount(request, value);
 
             return request;
         }
 
-        public static MonthlyBundlerRequest CreateMonthlyBundlerRequest(string name, int dueDay, List<int> tags, int inComeId)
+        public static MonthlyBundlerRequest CreateMonthlyBundlerRequest(string name, int dueDay, int category, int inComeId)
         {
             var request = new MonthlyBundlerRequest();
 
-            SetDebt(request, name, tags);
+            SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);
 
             return request;
         }
-        public static MonthlyRequest CreateMonthlyRequest(string name, decimal value, int dueDay, List<int> tags, int inComeId)
+        public static MonthlyRequest CreateMonthlyRequest(string name, decimal value, int dueDay, int category, int inComeId)
         {
             var request = new MonthlyRequest();
 
-            SetDebt(request, name, tags);
+            SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);
             SetItemAmount(request, value);
 
             return request;
         }
 
-        public static PontualRequest CreatePontualRequest(string name, decimal value, int dueDay, List<int> tags, int inComeId, int month, int year)
+        public static PontualRequest CreatePontualRequest(string name, decimal value, int dueDay, int category, int inComeId, int month, int year)
         {
             var request = new PontualRequest();
 
             request.Month = new utilities.entries.MonthEntry { Value = month.ToString() };
             request.Year = new utilities.entries.IntEntry { Value = year.ToString() };
 
-            SetDebt(request, name, tags);
+            SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);
             SetItemAmount(request, value);
 
             return request;
         }
 
-        public static YearlyRequest CreateYearlyRequest(string name, decimal value, int dueDay, List<int> tags, int inComeId, int dueMonth)
+        public static YearlyRequest CreateYearlyRequest(string name, decimal value, int dueDay, int category, int inComeId, int dueMonth)
         {
             var request = new YearlyRequest();
 
             request.DueMonth = new utilities.entries.MonthEntry { Value = dueMonth.ToString() };
 
-            SetDebt(request, name, tags);
+            SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);
             SetItemAmount(request, value);
 
@@ -84,10 +84,10 @@ namespace adduo.elephant.test
             request.Value = new utilities.entries.DecimalEntry { Value = value.ToString() };
         }
 
-        public static void SetDebt(DebtRequest request, string name,  List<int> tags)
+        public static void SetDebt(DebtRequest request, string name, int categoryId)
         {
             request.Name = new utilities.entries.NameEntry() { Value = name };
-            request.Tags = new utilities.entries.ListEntry<int> { Value = tags };
+            request.CategoryId = new utilities.entries.IntEntry { Value = categoryId.ToString() };
         }
     }
 }

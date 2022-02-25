@@ -12,7 +12,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             var request = HelperDebtBundlerItemsTest.CreateMonthlyRequest(
                             "René Bizelli",
                             DateTime.Now.Millisecond,
-                            new System.Collections.Generic.List<int> { 1, 2 },
+                            1,
                             Guid.NewGuid());
                             
 
@@ -20,6 +20,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
 
             base.ShouldBeOkAndValidStatusDebt(request);
             base.ShouldBeOkAndValidStatusItem(request);
+            base.ShouldBeOkAndValidStatusItemAmountRequest(request);
         }
 
         [Fact]
@@ -31,6 +32,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
 
             base.ShouldBeBadRequestAndInvalidStatusDebt(request);
             base.ShouldBeBadRequestAndInvalidStatusItemRequest(request);
+            base.ShouldBeBadRequestAndInvalidStatusItemAmountRequest(request);
         }
     }
 }

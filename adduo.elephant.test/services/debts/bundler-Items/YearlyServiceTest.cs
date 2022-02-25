@@ -16,7 +16,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         public async Task ShoudCallMethodsWhenCallSave()
         {
             var request = new Mock<YearlyRequest>();
-            request.Object.Tags = new utilities.entries.ListEntry<int>();
+            request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
         }
@@ -25,7 +25,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
             var request = new Mock<YearlyRequest>();
-            request.Object.Tags = new utilities.entries.ListEntry<int>();
+            request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
         }
@@ -38,18 +38,19 @@ namespace adduo.elephant.test.services.debts.bundler_items
             var request = HelperDebtBundlerItemsTest.CreateYearlyRequest(
                 "Teste trocado",
                 DateTime.Now.Millisecond,
-                new List<int> { 3 },
+                3,
                 DateTime.Now.Month,
                 Guid.NewGuid());
 
             await base.ShoudUpdateEntityBase(Yearly.Id.ToString(), request);
 
-            var entity = await context.Set<Yearly>().Include(i => i.Tags).FirstAsync(f => f.Id == Yearly.Id);
+            var entity = await context.Set<Yearly>().Include(i => i.Category).FirstAsync(f => f.Id == Yearly.Id);
 
             Assert.Equal(request.DueMonth.GetValue(), entity.DueMonth);
 
             DebtAssert(request, entity);
             ItemAssert(request, entity);
+            ItemAmountAssert(request, entity);
         }
     }
 }

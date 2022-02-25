@@ -32,7 +32,7 @@ namespace adduo.elephant.domain.ioc
             services.AddScoped<IDebtRepository<entities.debts.bundler_items.Monthly>, DebtAccess<entities.debts.bundler_items.Monthly>>();
             services.AddScoped<IDebtRepository<entities.debts.bundler_items.Yearly>, DebtAccess<entities.debts.bundler_items.Yearly>>();
 
-            services.AddScoped<IItemRepository<entities.Tag, int>, ItemAccess<entities.Tag, int>>();
+            services.AddScoped<IItemRepository<entities.Category, int>, ItemAccess<entities.Category, int>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

@@ -11,15 +11,19 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
 
             Assert.Equal(utilities.entries.StatusCode.VALID, request.Name.Status);
-            Assert.Equal(utilities.entries.StatusCode.VALID, request.Tags.Status);
+            Assert.Equal(utilities.entries.StatusCode.VALID, request.CategoryId.Status);
         }
 
         public void ShouldBeOkAndValidStatusItem(ItemRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
-            
-            Assert.Equal(utilities.entries.StatusCode.VALID, request.Value.Status);
             Assert.Equal(utilities.entries.StatusCode.VALID, request.BundlerMonthly.Status);
+        }
+
+        public void ShouldBeOkAndValidStatusItemAmountRequest(ItemAmountRequest request)
+        {
+            Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
+            Assert.Equal(utilities.entries.StatusCode.VALID, request.Value.Status);
         }
 
         public void ShouldBeBadRequestAndInvalidStatusDebt(DebtRequest request)
@@ -27,15 +31,21 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
 
             Assert.Equal(utilities.entries.StatusCode.INVALID, request.Name.Status);
-            Assert.Equal(utilities.entries.StatusCode.INVALID, request.Tags.Status);
+            Assert.Equal(utilities.entries.StatusCode.INVALID, request.CategoryId.Status);
         }
 
         public void ShouldBeBadRequestAndInvalidStatusItemRequest(ItemRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
-
-            Assert.Equal(utilities.entries.StatusCode.INVALID, request.Value.Status);
             Assert.Equal(utilities.entries.StatusCode.INVALID, request.BundlerMonthly.Status);
+        }
+
+
+
+        public void ShouldBeBadRequestAndInvalidStatusItemAmountRequest(ItemAmountRequest request)
+        {
+            Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
+            Assert.Equal(utilities.entries.StatusCode.INVALID, request.Value.Status);
         }
     }
 }
