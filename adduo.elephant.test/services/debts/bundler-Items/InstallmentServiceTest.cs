@@ -4,7 +4,6 @@ using adduo.elephant.domain.requests.debts.bundler_items;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 

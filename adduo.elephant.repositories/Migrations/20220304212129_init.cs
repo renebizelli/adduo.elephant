@@ -106,7 +106,7 @@ namespace adduo.elephant.repositories.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "debt_amount_items",
+                name: "debt_bundler_amount_items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -114,9 +114,9 @@ namespace adduo.elephant.repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_debt_amount_items", x => x.Id);
+                    table.PrimaryKey("PK_debt_bundler_amount_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_debt_amount_items_debt_items_Id",
+                        name: "FK_debt_bundler_amount_items_debt_items_Id",
                         column: x => x.Id,
                         principalTable: "debt_items",
                         principalColumn: "Id",
@@ -184,9 +184,9 @@ namespace adduo.elephant.repositories.Migrations
                 {
                     table.PrimaryKey("PK_debt_installment_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_debt_installment_items_debt_amount_items_Id",
+                        name: "FK_debt_installment_items_debt_bundler_amount_items_Id",
                         column: x => x.Id,
-                        principalTable: "debt_amount_items",
+                        principalTable: "debt_bundler_amount_items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -202,9 +202,9 @@ namespace adduo.elephant.repositories.Migrations
                 {
                     table.PrimaryKey("PK_debt_monthly_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_debt_monthly_items_debt_amount_items_Id",
+                        name: "FK_debt_monthly_items_debt_bundler_amount_items_Id",
                         column: x => x.Id,
-                        principalTable: "debt_amount_items",
+                        principalTable: "debt_bundler_amount_items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -222,9 +222,9 @@ namespace adduo.elephant.repositories.Migrations
                 {
                     table.PrimaryKey("PK_debt_pontual_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_debt_pontual_items_debt_amount_items_Id",
+                        name: "FK_debt_pontual_items_debt_bundler_amount_items_Id",
                         column: x => x.Id,
-                        principalTable: "debt_amount_items",
+                        principalTable: "debt_bundler_amount_items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -241,9 +241,9 @@ namespace adduo.elephant.repositories.Migrations
                 {
                     table.PrimaryKey("PK_debt_yearly_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_debt_yearly_items_debt_amount_items_Id",
+                        name: "FK_debt_yearly_items_debt_bundler_amount_items_Id",
                         column: x => x.Id,
-                        principalTable: "debt_amount_items",
+                        principalTable: "debt_bundler_amount_items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -254,7 +254,6 @@ namespace adduo.elephant.repositories.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     BundlerMonthlyId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
@@ -282,7 +281,8 @@ namespace adduo.elephant.repositories.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     StartMonth = table.Column<int>(type: "int", nullable: false),
                     StartYear = table.Column<int>(type: "int", nullable: false),
-                    Installments = table.Column<int>(type: "int", nullable: false)
+                    Installments = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -300,7 +300,8 @@ namespace adduo.elephant.repositories.Migrations
                 name: "debt_bundler_monthly_items",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -320,7 +321,8 @@ namespace adduo.elephant.repositories.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Month = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false)
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -335,11 +337,30 @@ namespace adduo.elephant.repositories.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "debt_bundler_recurrent_items",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_debt_bundler_recurrent_items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_debt_bundler_recurrent_items_debt_bundler_items_Id",
+                        column: x => x.Id,
+                        principalTable: "debt_bundler_items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "debt_bundler_yearly_items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    DueMonth = table.Column<int>(type: "int", nullable: false)
+                    DueMonth = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -348,6 +369,30 @@ namespace adduo.elephant.repositories.Migrations
                         name: "FK_debt_bundler_yearly_items_debt_bundler_items_Id",
                         column: x => x.Id,
                         principalTable: "debt_bundler_items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "debt_bundler_recurrent_values",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    Description = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Value = table.Column<decimal>(type: "Decimal(18,2)", nullable: false),
+                    RecurrentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_debt_bundler_recurrent_values", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_debt_bundler_recurrent_values_debt_bundler_recurrent_items_R~",
+                        column: x => x.RecurrentId,
+                        principalTable: "debt_bundler_recurrent_items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -367,6 +412,11 @@ namespace adduo.elephant.repositories.Migrations
                 name: "IX_debt_bundler_items_BundlerMonthlyId",
                 table: "debt_bundler_items",
                 column: "BundlerMonthlyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_debt_bundler_recurrent_values_RecurrentId",
+                table: "debt_bundler_recurrent_values",
+                column: "RecurrentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_debt_items_InComeId",
@@ -407,6 +457,9 @@ namespace adduo.elephant.repositories.Migrations
                 name: "debt_bundler_pontual_items");
 
             migrationBuilder.DropTable(
+                name: "debt_bundler_recurrent_values");
+
+            migrationBuilder.DropTable(
                 name: "debt_bundler_yearly_items");
 
             migrationBuilder.DropTable(
@@ -425,13 +478,16 @@ namespace adduo.elephant.repositories.Migrations
                 name: "spreadsheet_items");
 
             migrationBuilder.DropTable(
-                name: "debt_bundler_items");
+                name: "debt_bundler_recurrent_items");
 
             migrationBuilder.DropTable(
-                name: "debt_amount_items");
+                name: "debt_bundler_amount_items");
 
             migrationBuilder.DropTable(
                 name: "spreadsheets");
+
+            migrationBuilder.DropTable(
+                name: "debt_bundler_items");
 
             migrationBuilder.DropTable(
                 name: "debt_monthly_bundlers");

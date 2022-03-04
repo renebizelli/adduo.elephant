@@ -20,6 +20,8 @@ namespace adduo.elephant.domain.ioc
             services.AddScoped<IDebtService<requests.debts.bundler_items.PontualRequest, entities.debts.bundler_items.Pontual>, DebtService<requests.debts.bundler_items.PontualRequest, entities.debts.bundler_items.Pontual>>();
             services.AddScoped<IDebtService<requests.debts.bundler_items.MonthlyRequest, entities.debts.bundler_items.Monthly>, DebtService<requests.debts.bundler_items.MonthlyRequest, entities.debts.bundler_items.Monthly>>();
             services.AddScoped<IDebtService<requests.debts.bundler_items.YearlyRequest, entities.debts.bundler_items.Yearly>, DebtService<requests.debts.bundler_items.YearlyRequest, entities.debts.bundler_items.Yearly>>();
+            services.AddScoped<IDebtService<requests.debts.bundler_items.RecurrentRequest, entities.debts.bundler_items.Recurrent>, DebtService<requests.debts.bundler_items.RecurrentRequest, entities.debts.bundler_items.Recurrent>>();
+            services.AddScoped<IRecurrenteValueService, RecurrenteValueService>();
 
             services.AddScoped<IDebtRepository<entities.debts.items.Installment>, DebtAccess<entities.debts.items.Installment>>();
             services.AddScoped<IDebtRepository<entities.debts.items.MonthlyBundler>, DebtAccess<entities.debts.items.MonthlyBundler>>();
@@ -31,6 +33,8 @@ namespace adduo.elephant.domain.ioc
             services.AddScoped<IDebtRepository<entities.debts.bundler_items.Pontual>, DebtAccess<entities.debts.bundler_items.Pontual>>();
             services.AddScoped<IDebtRepository<entities.debts.bundler_items.Monthly>, DebtAccess<entities.debts.bundler_items.Monthly>>();
             services.AddScoped<IDebtRepository<entities.debts.bundler_items.Yearly>, DebtAccess<entities.debts.bundler_items.Yearly>>();
+            services.AddScoped<IDebtRepository<entities.debts.bundler_items.Recurrent>, DebtAccess<entities.debts.bundler_items.Recurrent>>();
+            services.AddScoped<IRecurrentValueRepository, RecurrenteValueAccess>();
 
             services.AddScoped<IItemRepository<entities.Category, int>, ItemAccess<entities.Category, int>>();
 
