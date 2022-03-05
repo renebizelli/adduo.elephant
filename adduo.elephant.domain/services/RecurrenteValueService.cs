@@ -43,5 +43,38 @@ namespace adduo.elephant.domain.services
 
             return request;
         }
+
+
+        public async Task<RecurrentValueRequest> UpdateValueAsync(string recurrentId, string valueId, RecurrentValueRequest request)
+        {
+            var recurrentGuid = Guid.Empty;
+
+            if (!Guid.TryParse(recurrentId, out recurrentGuid))
+            {
+                throw new ArgumentException("recurrentId");
+            }
+
+            var id = 0;
+
+            if(!int.TryParse(valueId, out id))
+            {
+                throw new ArgumentException("valueId");
+            }
+
+            request.Validate();
+
+            if (request.AllFieldsAreValid())
+            {
+                var currentValue = await repository.GetAsync(recurrentGuid, id);
+
+                var entity = mapper.Map(request, currentValue);
+
+                repository.UpdateValue(entity);
+
+                await unitOfWork.CommitAsync();
+            }
+
+            return request;
+        }
     }
 }

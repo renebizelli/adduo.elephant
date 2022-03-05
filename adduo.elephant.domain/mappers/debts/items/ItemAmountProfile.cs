@@ -10,7 +10,7 @@ namespace adduo.elephant.domain.mappers.debts.items
         {
             CreateMap<ItemAmountRequest, ItemAmount>()
                 .IncludeBase<ItemRequest, Item>()
-               .ForMember(d => d.Amount, a => a.MapFrom(m => m.Value.GetValue()));
+               .ForMember(d => d.Amount, a => a.MapFrom(m => m.Amount.GetValue()));
         }
     }
 }

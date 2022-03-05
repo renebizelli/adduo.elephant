@@ -4,14 +4,13 @@ using AutoMapper;
 
 namespace adduo.elephant.domain.mappers.debts.bundler_items
 {
-    public class ItemAmountProfile : Profile
+    public class RecurrentUpdateProfile : Profile
     {
-        public ItemAmountProfile()
+        public RecurrentUpdateProfile()
         {
-            CreateMap<ItemAmountRequest, ItemAmount>()
+            CreateMap<RecurrentUpdateRequest, Recurrent>()
                 .IncludeBase<ItemRequest, Item>()
-               .ForMember(d => d.Amount, a => a.MapFrom(m => m.Amount.GetValue()));
+                .ForMember(d => d.Values, s => s.Ignore());
         }
     }
 }
-

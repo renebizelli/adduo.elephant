@@ -26,5 +26,17 @@ namespace adduo.elephant.repositories.access
                 recurrent.Values.Add(value);
             }
         }
+
+        public async Task<RecurrentValue> GetAsync(Guid recurrentId, int valueId)
+        {
+            var value = await context.Set<RecurrentValue>().FirstOrDefaultAsync(f => f.RecurrentId.Equals(recurrentId) && f.Id.Equals(valueId));
+
+            return value;
+        }
+
+        public void UpdateValue(RecurrentValue entity)
+        {
+            context.Set<RecurrentValue>().Update(entity);
+        }
     }
 }

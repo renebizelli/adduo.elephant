@@ -15,9 +15,9 @@ namespace adduo.elephant.repositories.access
             this.context = elephantContext;
         }
 
-        public Task<T> GetAsync(Guid guid)
+        public async Task<T> GetAsync(Guid guid)
         {
-            return context.Set<T>().Include(i => i.Category).FirstOrDefaultAsync(f => f.Id.Equals(guid));
+            return await context.Set<T>().Include(i => i.Category).FirstOrDefaultAsync(f => f.Id.Equals(guid));
         }
 
         public async Task SaveAsync(T entity)

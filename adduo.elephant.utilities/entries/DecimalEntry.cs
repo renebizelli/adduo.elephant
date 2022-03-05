@@ -1,4 +1,5 @@
-﻿using entry_validarions = adduo.elephant.utilities.entries.entry_validators;
+﻿using System.Globalization;
+using entry_validarions = adduo.elephant.utilities.entries.entry_validators;
 
 namespace adduo.elephant.utilities.entries
 {
@@ -13,7 +14,7 @@ namespace adduo.elephant.utilities.entries
         {
             decimal n = 0;
 
-            decimal.TryParse(Value, out n);
+            decimal.TryParse(Value, NumberStyles.Number, CultureInfo.GetCultureInfo("en"), out n);
 
             return n;
         }

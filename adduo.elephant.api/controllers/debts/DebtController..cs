@@ -8,19 +8,31 @@ namespace adduo.elephant.api.controllers.debts
 {
     [ApiController]
     [ApiVersion("1.0")]
-    public class DebtController<TRequest, TDetb> : ControllerBase 
-        where TRequest : DebtRequest
-        where TDetb : Debt
+    public class DebtController<TSaveRequest, TEntity> : DebtController<TSaveRequest, TSaveRequest, TEntity>
+        where TSaveRequest : DebtRequest
+        where TEntity : Debt
     {
-        private readonly IDebtService<TRequest, TDetb> service;
+        public DebtController(IDebtService<TSaveRequest, TEntity> service) : base(service)
+        {
+        }
+    }
 
-        public DebtController(IDebtService<TRequest, TDetb> service)
+    [ApiController]
+    [ApiVersion("1.0")]
+    public class DebtController<TSaveRequest, TUpdateRequest, TEntity> : ControllerBase 
+        where TSaveRequest : DebtRequest
+        where TUpdateRequest : DebtRequest
+        where TEntity : Debt
+    {
+        private readonly IDebtService<TSaveRequest, TUpdateRequest, TEntity> service;
+
+        public DebtController(IDebtService<TSaveRequest, TUpdateRequest, TEntity> service)
         {
             this.service = service;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TRequest request)
+        public async Task<IActionResult> Post([FromBody] TSaveRequest request)
         {
             var response = await service.SaveAsync(request);
 
@@ -28,7 +40,7 @@ namespace adduo.elephant.api.controllers.debts
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] string id, [FromBody] TRequest request)
+        public async Task<IActionResult> Put([FromRoute] string id, [FromBody] TUpdateRequest request)
         {
             var response = await service.UpdateAsync(id, request);
 

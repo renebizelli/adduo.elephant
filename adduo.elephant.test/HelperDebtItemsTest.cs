@@ -81,7 +81,7 @@ namespace adduo.elephant.test
 
         private static void SetItemAmount(ItemAmountRequest request, decimal value)
         {
-            request.Value = new utilities.entries.DecimalEntry { Value = value.ToString() };
+            request.Amount = new utilities.entries.DecimalEntry { Value = value.ToString() };
         }
 
         public static void SetDebt(DebtRequest request, string name, int categoryId)

@@ -1,4 +1,4 @@
-﻿using adduo.elephant.domain.entities.debts.items;
+﻿using adduo.elephant.domain.entities.debts.bundler_items;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

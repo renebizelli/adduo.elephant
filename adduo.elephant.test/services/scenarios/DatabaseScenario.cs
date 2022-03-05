@@ -36,6 +36,9 @@ namespace adduo.elephant.test.services.scenarios
             var yearlyBundler = new domain.entities.debts.bundler_items.Yearly(Guid.NewGuid(), "Teste", 10, 1, Guid.NewGuid());
             SetMockDbSet<domain.entities.debts.bundler_items.Yearly, Guid>(yearlyBundler);
 
+            var recurrentBundler = new domain.entities.debts.bundler_items.Recurrent(Guid.NewGuid(), "Teste", "description", 100, Guid.NewGuid());
+            SetMockDbSet<domain.entities.debts.bundler_items.Recurrent, Guid>(recurrentBundler);
+
             var categories = new List<Category>
             {
                 new Category(1, "AAAAA"),

@@ -6,6 +6,8 @@ namespace adduo.elephant.domain.contracts.repositories
 {
     public interface IRecurrentValueRepository
     {
-        Task AddValueAsync(Guid id, RecurrentValue value);
+        Task AddValueAsync(Guid recurrentId, RecurrentValue value);
+        void UpdateValue(RecurrentValue value);
+        Task<RecurrentValue> GetAsync(Guid recurrentId, int valueId);
     }
 }

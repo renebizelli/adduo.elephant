@@ -27,6 +27,9 @@ namespace adduo.elephant.test.mappers
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.InstallmentProfile());
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.MonthlyProfile());
                 cfg.AddProfile(new domain.mappers.debts.bundler_items.YearlyProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentSaveProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentUpdateProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentValueProfile());
             });
         }
 

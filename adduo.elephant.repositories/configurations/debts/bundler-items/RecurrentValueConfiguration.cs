@@ -18,7 +18,7 @@ namespace adduo.elephant.repositories.configurations.debts.bundler_items
                     .HasColumnType("DateTime")
                     .IsRequired();
 
-            builder.Property(p => p.Value)
+            builder.Property(p => p.Amount)
                     .HasColumnType("Decimal(18,2)")
                     .IsRequired();
 

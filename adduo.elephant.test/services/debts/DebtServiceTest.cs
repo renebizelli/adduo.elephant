@@ -10,14 +10,22 @@ using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace adduo.elephant.test.services.debts
 {
-    public class DebtServiceTest<TRequest, TEntity, TProfile>
-        where TRequest : DebtRequest
+    public class DebtServiceTest<TSaveRequest, TEntity, TProfile> : DebtServiceTest<TSaveRequest, TSaveRequest, TEntity, TProfile>
+        where TSaveRequest : DebtRequest
+        where TEntity : Debt
+        where TProfile : Profile
+    {
+
+    }
+
+    public class DebtServiceTest<TSaveRequest, TUpdateRequest, TEntity, TProfile>
+        where TSaveRequest : DebtRequest
+        where TUpdateRequest : DebtRequest
         where TEntity : Debt
         where TProfile : Profile
     {
@@ -46,7 +54,7 @@ namespace adduo.elephant.test.services.debts
             context = new DatabaseScenario().Create();
         }
 
-        public async Task ShoudCallMethodsWhenCallSaveBase(Mock<TRequest> request)
+        public async Task ShoudCallMethodsWhenCallSaveBase(Mock<TSaveRequest> request)
         {
             request.Setup(s => s.AllFieldsAreValid()).Returns(true);
 
@@ -56,7 +64,7 @@ namespace adduo.elephant.test.services.debts
             var unitOfWork = new Mock<IUnitOfWork>();
             unitOfWork.Setup(s => s.CommitAsync()).Returns(Task.CompletedTask);
 
-            var service = new DebtService<TRequest, TEntity>(mapper, repository.Object, unitOfWork.Object);
+            var service = new DebtService<TSaveRequest, TEntity>(mapper, repository.Object, unitOfWork.Object);
             await service.SaveAsync(request.Object);
 
             request.Verify(v => v.Validate(), Times.Once());
@@ -65,7 +73,7 @@ namespace adduo.elephant.test.services.debts
             unitOfWork.Verify(v => v.CommitAsync(), Times.Once());
         }
 
-        public async Task ShoudCallMethodsWhenCallUpdateBase(string id, Mock<TRequest> request)
+        public async Task ShoudCallMethodsWhenCallUpdateBase(string id, Mock<TUpdateRequest> request)
         {
             request.Setup(s => s.AllFieldsAreValid()).Returns(true);
 
@@ -75,7 +83,7 @@ namespace adduo.elephant.test.services.debts
             var unitOfWork = new Mock<IUnitOfWork>();
             unitOfWork.Setup(s => s.CommitAsync()).Returns(Task.CompletedTask);
 
-            var service = new DebtService<TRequest, TEntity>(mapper, repository.Object, unitOfWork.Object);
+            var service = new DebtService<TUpdateRequest, TEntity>(mapper, repository.Object, unitOfWork.Object);
             await service.UpdateAsync(id, request.Object);
 
             request.Verify(v => v.Validate(), Times.Once());
@@ -84,13 +92,13 @@ namespace adduo.elephant.test.services.debts
             unitOfWork.Verify(v => v.CommitAsync(), Times.Once());
         }
 
-        public async Task ShoudUpdateEntityBase(string id, TRequest request)
+        public async Task ShoudUpdateEntityBase(string id, TUpdateRequest request)
         {
             var repository = new DebtAccess<TEntity>(context);
 
             var unitOfWork = new UnitOfWork(context);
 
-            var service = new DebtService<TRequest, TEntity>(mapper, repository, unitOfWork);
+            var service = new DebtService<TUpdateRequest, TEntity>(mapper, repository, unitOfWork);
             await service.UpdateAsync(id, request);
         }
 
@@ -109,7 +117,7 @@ namespace adduo.elephant.test.services.debts
 
         protected void ItemAmountAssert(domain.requests.debts.items.ItemAmountRequest request, domain.entities.debts.items.ItemAmount entity)
         {
-            Assert.Equal(request.Value.GetValue(), entity.Amount);
+            Assert.Equal(request.Amount.GetValue(), entity.Amount);
         }
 
         protected void ItemAssert(domain.requests.debts.bundler_items.ItemRequest request, domain.entities.debts.bundler_items.Item entity)
@@ -119,7 +127,7 @@ namespace adduo.elephant.test.services.debts
 
         protected void ItemAmountAssert(domain.requests.debts.bundler_items.ItemAmountRequest request, domain.entities.debts.bundler_items.ItemAmount entity)
         {
-            Assert.Equal(request.Value.GetValue(), entity.Amount);
+            Assert.Equal(request.Amount.GetValue(), entity.Amount);
         }
     }
 }

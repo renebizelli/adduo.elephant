@@ -8,8 +8,18 @@ using System.Threading.Tasks;
 
 namespace adduo.elephant.domain.services
 {
-    public class DebtService<TRequest, TEntity> : IDebtService<TRequest, TEntity>
-                where TRequest : DebtRequest
+    public class DebtService<TSaveRequest, TEntity> : DebtService<TSaveRequest, TSaveRequest, TEntity>, IDebtService<TSaveRequest, TEntity>
+                where TSaveRequest : DebtRequest
+                where TEntity : Debt
+    {
+        public DebtService(IMapper mapper, IDebtRepository<TEntity> repository, IUnitOfWork unitOfWork) : base(mapper, repository, unitOfWork)
+        {
+        }
+    }
+
+    public class DebtService<TSaveRequest, TUpdateRequest, TEntity> : IDebtService<TSaveRequest, TUpdateRequest, TEntity>
+                where TSaveRequest : DebtRequest
+                where TUpdateRequest : DebtRequest
                 where TEntity : Debt
     {
         private readonly IMapper mapper;
@@ -23,11 +33,11 @@ namespace adduo.elephant.domain.services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<TRequest> SaveAsync(TRequest request)
+        public async Task<TSaveRequest> SaveAsync(TSaveRequest request)
         {
             request.Validate();
 
-            if(request.AllFieldsAreValid())
+            if (request.AllFieldsAreValid())
             {
                 request.Id = Guid.NewGuid();
 
@@ -43,11 +53,11 @@ namespace adduo.elephant.domain.services
             return request;
         }
 
-        public async Task<TRequest> UpdateAsync(string id, TRequest request)
+        public async Task<TUpdateRequest> UpdateAsync(string id, TUpdateRequest request)
         {
             var guid = Guid.Empty;
 
-            if(!Guid.TryParse(id, out guid))
+            if (!Guid.TryParse(id, out guid))
             {
                 throw new ArgumentException("id");
             }
@@ -60,9 +70,15 @@ namespace adduo.elephant.domain.services
 
                 var entity = await repository.GetAsync(guid);
 
-                mapper.Map<TRequest, TEntity>(request, entity);
-
-                await unitOfWork.CommitAsync();
+                if (entity == null)
+                {
+                    request.SetNotFoundHttpStatusCode();
+                }
+                else
+                {
+                    mapper.Map<TUpdateRequest, TEntity>(request, entity);
+                    await unitOfWork.CommitAsync();
+                }
             }
 
             return request;

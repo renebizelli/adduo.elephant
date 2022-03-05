@@ -20,7 +20,7 @@ namespace adduo.elephant.domain.ioc
             services.AddScoped<IDebtService<requests.debts.bundler_items.PontualRequest, entities.debts.bundler_items.Pontual>, DebtService<requests.debts.bundler_items.PontualRequest, entities.debts.bundler_items.Pontual>>();
             services.AddScoped<IDebtService<requests.debts.bundler_items.MonthlyRequest, entities.debts.bundler_items.Monthly>, DebtService<requests.debts.bundler_items.MonthlyRequest, entities.debts.bundler_items.Monthly>>();
             services.AddScoped<IDebtService<requests.debts.bundler_items.YearlyRequest, entities.debts.bundler_items.Yearly>, DebtService<requests.debts.bundler_items.YearlyRequest, entities.debts.bundler_items.Yearly>>();
-            services.AddScoped<IDebtService<requests.debts.bundler_items.RecurrentRequest, entities.debts.bundler_items.Recurrent>, DebtService<requests.debts.bundler_items.RecurrentRequest, entities.debts.bundler_items.Recurrent>>();
+            services.AddScoped<IDebtService<requests.debts.bundler_items.RecurrentSaveRequest, requests.debts.bundler_items.RecurrentUpdateRequest, entities.debts.bundler_items.Recurrent>, DebtService<requests.debts.bundler_items.RecurrentSaveRequest, requests.debts.bundler_items.RecurrentUpdateRequest, entities.debts.bundler_items.Recurrent>>();
             services.AddScoped<IRecurrenteValueService, RecurrenteValueService>();
 
             services.AddScoped<IDebtRepository<entities.debts.items.Installment>, DebtAccess<entities.debts.items.Installment>>();

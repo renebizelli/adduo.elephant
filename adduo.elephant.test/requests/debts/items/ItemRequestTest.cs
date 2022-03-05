@@ -25,7 +25,7 @@ namespace adduo.elephant.test.requests.debts.items
         public void ShouldBeOkAndValidStatusItemAmount(ItemAmountRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
-            Assert.Equal(utilities.entries.StatusCode.VALID, request.Value.Status);
+            Assert.Equal(utilities.entries.StatusCode.VALID, request.Amount.Status);
         }
 
         public void ShouldBeBadRequestAndInvalidStatusDebt(DebtRequest request)
@@ -47,7 +47,7 @@ namespace adduo.elephant.test.requests.debts.items
         public void ShouldBeBadRequestAndInvalidStatusItemAmountRequest(ItemAmountRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
-            Assert.Equal(utilities.entries.StatusCode.INVALID, request.Value.Status);
+            Assert.Equal(utilities.entries.StatusCode.INVALID, request.Amount.Status);
         }
 
     }

@@ -46,6 +46,38 @@ namespace adduo.elephant.test
             return request;
         }
 
+        public static RecurrentSaveRequest CreateRecurrentSaveRequest(string name, string description, decimal value, int category, Guid bundlerMonthly)
+        {
+            var request = new RecurrentSaveRequest();
+
+            request.Value.Value = value.ToString();
+            request.Description.Value = description;
+
+            SetDebt(request, name, category);
+            SetItem(request, bundlerMonthly);
+
+            return request;
+        }
+
+        public static RecurrentUpdateRequest CreateRecurrentUpdateRequest(string name, int category, Guid bundlerMonthly)
+        {
+            var request = new RecurrentUpdateRequest();
+
+            SetDebt(request, name, category);
+            SetItem(request, bundlerMonthly);
+
+            return request;
+        }
+        public static RecurrentValueRequest CreateRecurrentValueRequest(string description, decimal value)
+        {
+            var request = new RecurrentValueRequest();
+
+            request.Description.Value = description;
+            request.Amount.Value = value.ToString();
+
+            return request;
+        }
+
         public static YearlyRequest CreateYearlyRequest(string name, decimal value, int category, int dueMonth, Guid bundlerMonthly)
         {
             var request = new YearlyRequest();
@@ -67,7 +99,7 @@ namespace adduo.elephant.test
 
         private static void SetItemAmount(ItemAmountRequest request, decimal value)
         {
-            request.Value = new utilities.entries.DecimalEntry { Value = value.ToString() };
+            request.Amount = new utilities.entries.DecimalEntry { Value = value.ToString() };
         }
 
         public static void SetDebt(DebtRequest request, string name, int categoryId)

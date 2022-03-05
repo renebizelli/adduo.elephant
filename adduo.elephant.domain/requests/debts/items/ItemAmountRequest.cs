@@ -5,27 +5,27 @@ namespace adduo.elephant.domain.requests.debts.items
 {
     public class ItemAmountRequest : ItemRequest
     {
-        public DecimalEntry Value { get; set; }
+        public DecimalEntry Amount { get; set; }
 
         public override void AddEntries()
         {
             base.AddEntries();
 
-            AddEntry(Value);
+            AddEntry(Amount);
         }
 
         public override void InitEntries()
         {
             base.InitEntries();
             
-            Value = new DecimalEntry();
+            Amount = new DecimalEntry();
         }
 
         public override void AddValidators()
         {
             base.AddValidators();
             
-            Value.AddValidation(new DecimalNotZero());
+            Amount.AddValidation(new DecimalNotZero());
         }
     }
 }

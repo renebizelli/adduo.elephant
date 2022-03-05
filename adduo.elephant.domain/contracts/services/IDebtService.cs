@@ -5,11 +5,19 @@ using System.Threading.Tasks;
 
 namespace adduo.elephant.domain.contracts.services
 {
-    public interface IDebtService<TRequest, TEntity> 
-        where TRequest : DebtRequest
+    public interface IDebtService<TSaveRequest, TEntity> : IDebtService<TSaveRequest, TSaveRequest, TEntity>
+        where TSaveRequest : DebtRequest
         where TEntity : Debt
     {
-        Task<TRequest> SaveAsync(TRequest debt);
-        Task<TRequest> UpdateAsync(string id, TRequest debt);
+
+    }
+
+    public interface IDebtService<TSaveRequest, TUpdateRequest, TEntity> 
+        where TSaveRequest : DebtRequest
+        where TUpdateRequest : DebtRequest
+        where TEntity : Debt
+    {
+        Task<TSaveRequest> SaveAsync(TSaveRequest debt);
+        Task<TUpdateRequest> UpdateAsync(string id, TUpdateRequest debt);
     }
 }
