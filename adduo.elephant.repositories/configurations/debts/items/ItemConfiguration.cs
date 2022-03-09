@@ -14,12 +14,13 @@ namespace adduo.elephant.repositories.configurations.debts.items
                 .IsRequired();
 
             builder.HasOne(o => o.InCome)
-                .WithMany(m => m.ItemDebts)
+                .WithMany()
                 .HasForeignKey(f => f.InComeId);
 
-            builder.HasMany(m => m.SpreadSheetItems)
-                .WithOne(o => o.Item)
-                .HasForeignKey(f => f.ItemId);
+            //builder.HasDiscriminator<int>("Type")
+            //    .HasValue<domain.entities.debts.items.ItemAmount>(1)
+            //    .HasValue<domain.entities.debts.items.MonthlyBundler>(2);
+
         }
     }
 }

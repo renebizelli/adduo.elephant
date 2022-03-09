@@ -15,6 +15,9 @@ namespace adduo.elephant.domain.entities.debts
         public virtual int CategoryId { get; set; }
         public DebtStatuses Status { get; private set; }
         public DateTime CreatedAt { get; set; }
+
+        public virtual List<SpreadSheetItem> SpreadSheetItems { get; private set; } = new List<SpreadSheetItem>();
+
         public Debt()
         {
 

@@ -2,16 +2,16 @@
 
 namespace adduo.elephant.domain.entities.debts.bundler_items
 {
-    public class ItemAmount : Item
+    public class ItemAmountBundler : ItemBundler
     {
         public decimal Amount { get; set; }
 
-        public ItemAmount()
+        public ItemAmountBundler()
         {
 
         }
 
-        public ItemAmount(Guid id, string name, decimal amount, Guid bundlerMonthlyId) : base(id, name,  bundlerMonthlyId)
+        public ItemAmountBundler(Guid id, string name, decimal amount, Guid bundlerMonthlyId) : base(id, name,  bundlerMonthlyId)
         {
             Amount = amount;
         }

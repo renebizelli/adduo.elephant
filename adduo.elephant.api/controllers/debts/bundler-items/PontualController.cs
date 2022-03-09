@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace adduo.elephant.api.controllers.debts.bundler_items
 {
     [Route("v{version:apiVersion}/debts/bundler/pontual")]
-    public class PontualController : DebtController<PontualRequest, Pontual>
+    public class PontualController : DebtController<PontualBundlerRequest, PontualBundler>
     {
-        public PontualController(IDebtService<PontualRequest, Pontual> service) : base(service)
+        public PontualController(IDebtService<PontualBundlerRequest, PontualBundler> service) : base(service)
         {
         }
     }

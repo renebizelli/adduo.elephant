@@ -6,11 +6,16 @@ namespace adduo.elephant.domain.mappers.debts.items
 {
     public class YearlyProfile : Profile
     {
-        public YearlyProfile() 
+        public YearlyProfile()
         {
             CreateMap<YearlyRequest, Yearly>()
                 .IncludeBase<ItemAmountRequest, ItemAmount>()
                 .ForMember(d => d.DueMonth, a => a.MapFrom(src => src.DueMonth.GetValue()));
+
+            CreateMap<Yearly, dtos.debts.items.Yearly>()
+                .IncludeBase<ItemAmount, dtos.debts.items.ItemAmount>()
+                .ForMember(d => d.DueMonth, a => a.MapFrom(src => src.DueMonth));
+
         }
     }
 }

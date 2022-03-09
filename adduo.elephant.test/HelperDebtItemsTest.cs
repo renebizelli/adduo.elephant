@@ -21,9 +21,9 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static MonthlyBundlerRequest CreateMonthlyBundlerRequest(string name, int dueDay, int category, int inComeId)
+        public static BundlerMonthlyRequest CreateMonthlyBundlerRequest(string name, int dueDay, int category, int inComeId)
         {
-            var request = new MonthlyBundlerRequest();
+            var request = new BundlerMonthlyRequest();
 
             SetDebt(request, name, category);
             SetItem(request, dueDay, inComeId);

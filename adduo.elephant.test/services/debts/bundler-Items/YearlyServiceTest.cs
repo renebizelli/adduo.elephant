@@ -10,12 +10,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services.debts.bundler_items
 {
-    public class YearlyServiceTest : DebtServiceTest<YearlyRequest, Yearly, YearlyProfile>
+    public class YearlyServiceTest : DebtServiceTest<YearlyBundlerRequest, YearlyBundler, YearlyBundlerProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<YearlyRequest>();
+            var request = new Mock<YearlyBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
@@ -24,7 +24,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
-            var request = new Mock<YearlyRequest>();
+            var request = new Mock<YearlyBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
@@ -33,7 +33,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudUpdateEntity()
         {
-            var Yearly = await context.Set<Yearly>().FirstAsync();
+            var Yearly = await context.Set<YearlyBundler>().FirstAsync();
 
             var request = HelperDebtBundlerItemsTest.CreateYearlyRequest(
                 "Teste trocado",
@@ -44,7 +44,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
 
             await base.ShoudUpdateEntityBase(Yearly.Id.ToString(), request);
 
-            var entity = await context.Set<Yearly>().Include(i => i.Category).FirstAsync(f => f.Id == Yearly.Id);
+            var entity = await context.Set<YearlyBundler>().Include(i => i.Category).FirstAsync(f => f.Id == Yearly.Id);
 
             Assert.Equal(request.DueMonth.GetValue(), entity.DueMonth);
 

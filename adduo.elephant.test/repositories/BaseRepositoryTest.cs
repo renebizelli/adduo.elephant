@@ -13,7 +13,7 @@ namespace adduo.elephant.test.repositories
     {
         public ElephantContext context { get; }
         public UnitOfWork unitOfWork { get; }
-        public DebtAccess<T> repository { get; }
+        public DebtRepository<T> repository { get; }
 
         public BaseRepositoryTest()
         {
@@ -27,7 +27,7 @@ namespace adduo.elephant.test.repositories
 
             unitOfWork = new UnitOfWork(context);
 
-            repository = new DebtAccess<T>(context);
+            repository = new DebtRepository<T>(context);
         }
 
         public async Task SaveAsyncTest(T entity)

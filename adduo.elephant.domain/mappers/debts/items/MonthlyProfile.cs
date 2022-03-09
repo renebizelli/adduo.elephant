@@ -10,6 +10,9 @@ namespace adduo.elephant.domain.mappers.debts.items
         {
             CreateMap<MonthlyRequest, Monthly>()
                 .IncludeBase<ItemAmountRequest, ItemAmount>();
+
+            CreateMap<Monthly, dtos.debts.items.Monthly>()
+                    .IncludeBase<ItemAmount, dtos.debts.items.ItemAmount>();
         }
     }
 }

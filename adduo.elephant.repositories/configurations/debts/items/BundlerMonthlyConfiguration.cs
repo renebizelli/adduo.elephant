@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace adduo.elephant.repositories.configurations.debts.items
 {
-    public class BundlerMonthlyConfiguration : IEntityTypeConfiguration<MonthlyBundler>
+    public class BundlerMonthlyConfiguration : IEntityTypeConfiguration<BundlerMonthly>
     {
-        public void Configure(EntityTypeBuilder<MonthlyBundler> builder)
+        public void Configure(EntityTypeBuilder<BundlerMonthly> builder)
         {
             builder.ToTable("debt_monthly_bundlers");
         }

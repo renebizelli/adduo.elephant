@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace adduo.elephant.api.controllers.debts.items
 {
     [Route("v{version:apiVersion}/debts/installments")]
-    [ApiController]
     public class InstallmentsController : DebtController<InstallmentRequest, Installment>
     {
         public InstallmentsController(IDebtService<InstallmentRequest, Installment> service) : base(service)

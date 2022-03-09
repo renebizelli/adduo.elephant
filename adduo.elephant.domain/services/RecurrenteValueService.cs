@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace adduo.elephant.domain.services
 {
-    public class RecurrenteValueService : IRecurrenteValueService
+    public class RecurrenteValueService : IRecurrenteValueBundlerService
     {
-        private readonly IRecurrentValueRepository repository;
+        private readonly IRecurrentValueBundlerRepository repository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
 
-        public RecurrenteValueService(IRecurrentValueRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
+        public RecurrenteValueService(IRecurrentValueBundlerRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<RecurrentValueRequest> AddValueAsync(string id, RecurrentValueRequest request)
+        public async Task<RecurrentValueBundlerRequest> AddValueAsync(string id, RecurrentValueBundlerRequest request)
         {
             var guid = Guid.Empty;
 
@@ -34,7 +34,7 @@ namespace adduo.elephant.domain.services
 
             if (request.AllFieldsAreValid())
             {
-                var entity = mapper.Map<RecurrentValue>(request);
+                var entity = mapper.Map<RecurrentBundlerValue>(request);
 
                 await repository.AddValueAsync(guid, entity);
 
@@ -45,7 +45,7 @@ namespace adduo.elephant.domain.services
         }
 
 
-        public async Task<RecurrentValueRequest> UpdateValueAsync(string recurrentId, string valueId, RecurrentValueRequest request)
+        public async Task<RecurrentValueBundlerRequest> UpdateValueAsync(string recurrentId, string valueId, RecurrentValueBundlerRequest request)
         {
             var recurrentGuid = Guid.Empty;
 

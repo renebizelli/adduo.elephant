@@ -1,4 +1,5 @@
 using adduo.elephant.api.configurations;
+using adduo.elephant.api.filters;
 using adduo.elephant.domain.ioc;
 using adduo.elephant.repositories;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +23,13 @@ namespace adduo.elephant.api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+              .AddControllers()
+                 .AddJsonOptions(options =>
+                 {
+                     options.JsonSerializerOptions.Converters.Add(new AsRuntimeTypeConverter<domain.dtos.debts.Debt>());
+                 });
+
             services.AddApiVersion();
 
             services.AddIoC();
@@ -39,6 +46,8 @@ namespace adduo.elephant.api
             }
 
             app.UseRouting();
+
+            app.AddGlobalExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {

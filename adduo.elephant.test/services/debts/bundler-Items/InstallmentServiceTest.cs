@@ -9,12 +9,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services.debts.bundler_items
 {
-    public class InstallmentServiceTest : DebtServiceTest<InstallmentRequest, Installment, InstallmentProfile>
+    public class InstallmentServiceTest : DebtServiceTest<InstallmentBundlerRequest, InstallmentBundler, InstallmentBundlerProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<InstallmentRequest>();
+            var request = new Mock<InstallmentBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
@@ -24,7 +24,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
-            var request = new Mock<InstallmentRequest>();
+            var request = new Mock<InstallmentBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
@@ -33,7 +33,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudUpdateEntity()
         {
-            var installment = await context.Set<Installment>().FirstAsync();
+            var installment = await context.Set<InstallmentBundler>().FirstAsync();
 
             var request = HelperDebtBundlerItemsTest.CreateInstallmentRequest(
                 "Teste trocado",
@@ -46,7 +46,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
 
             await base.ShoudUpdateEntityBase(installment.Id.ToString(), request);
 
-            var entity = await context.Set<Installment>().Include(i => i.Category).FirstAsync(f => f.Id == installment.Id);
+            var entity = await context.Set<InstallmentBundler>().Include(i => i.Category).FirstAsync(f => f.Id == installment.Id);
 
             Assert.Equal(request.StartMonth.GetValue(), entity.StartMonth);
             Assert.Equal(request.StartYear.GetValue(), entity.StartYear);

@@ -21,6 +21,20 @@ namespace adduo.elephant.repositories.configurations.debts
             builder.Property(p => p.Status)
                 .HasColumnType("tinyint")
                 .IsRequired();
+
+            builder.HasMany(m => m.SpreadSheetItems)
+                .WithOne(o => o.Debt)
+                .HasForeignKey(f => f.DebtId);
+
+            builder.HasOne(m => m.Category)
+                .WithMany()
+                .HasForeignKey(f => f.CategoryId);
+
+            //builder.HasDiscriminator<int>("Type")
+            //.HasValue<domain.entities.debts.items.Item>(1)
+            //.HasValue<domain.entities.debts.bundler_items.Item>(2);
+
+
         }
     }
 }

@@ -24,7 +24,7 @@ namespace adduo.elephant.test.requests.debts.items
         [Fact]
         public void InvalidRequest()
         {
-            var request = new MonthlyBundlerRequest();
+            var request = new BundlerMonthlyRequest();
 
             request.Validate();
 

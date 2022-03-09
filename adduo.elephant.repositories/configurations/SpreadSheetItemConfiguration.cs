@@ -11,9 +11,17 @@ namespace adduo.elephant.repositories.configurations
             builder.ToTable("spreadsheet_items");
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(o => o.Item)
+            builder.Property(p => p.CurrentAmount)
+                .HasColumnType("Decimal(18,2)")
+                .IsRequired();
+
+            builder.Property(p => p.PayedAmount)
+                .HasColumnType("Decimal(18,2)")
+                .IsRequired();
+
+            builder.HasOne(o => o.Debt)
                 .WithMany(m => m.SpreadSheetItems)
-                .HasForeignKey(f => f.ItemId);
+                .HasForeignKey(f => f.DebtId);
 
             builder.HasOne(o => o.SpreadSheet)
                 .WithMany(m => m.Items)

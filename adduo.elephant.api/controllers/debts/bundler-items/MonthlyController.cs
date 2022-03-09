@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace adduo.elephant.api.controllers.debts.bundler_items
 {
     [Route("v{version:apiVersion}/debts/bundler/monthly")]
-    [ApiController]
-    public class MonthlyController : DebtController<MonthlyRequest, Monthly>
+    public class MonthlyController : DebtController<MonthlyBundlerRequest, MonthlyBundler>
     {
-        public MonthlyController(IDebtService<MonthlyRequest, Monthly> service) : base(service)
+        public MonthlyController(IDebtService<MonthlyBundlerRequest, MonthlyBundler> service) : base(service)
         {
         }
     }

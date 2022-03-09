@@ -9,12 +9,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services.debts.bundler_items
 {
-    public class RecurrentServiceTest : DebtServiceTest<RecurrentSaveRequest, RecurrentUpdateRequest, Recurrent, RecurrentSaveProfile>
+    public class RecurrentServiceTest : DebtServiceTest<RecurrentBundlerSaveRequest, RecurrentBundlerUpdateRequest, RecurrentBundler, RecurrentBundlerSaveProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<RecurrentSaveRequest>();
+            var request = new Mock<RecurrentBundlerSaveRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
             request.Object.Value = new utilities.entries.DecimalEntry();
             request.Object.Description = new utilities.entries.String64Entry();
@@ -26,7 +26,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
-            var request = new Mock<RecurrentUpdateRequest>();
+            var request = new Mock<RecurrentBundlerUpdateRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
@@ -35,7 +35,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudUpdateEntity()
         {
-            var Recurrent = await context.Set<Recurrent>().FirstAsync();
+            var Recurrent = await context.Set<RecurrentBundler>().FirstAsync();
 
             var request = HelperDebtBundlerItemsTest.CreateRecurrentUpdateRequest(
                 "Teste trocado",
@@ -44,7 +44,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
 
             await base.ShoudUpdateEntityBase(Recurrent.Id.ToString(), request);
 
-            var entity = await context.Set<Recurrent>().Include(i => i.Category).FirstAsync(f => f.Id == Recurrent.Id);
+            var entity = await context.Set<RecurrentBundler>().Include(i => i.Category).FirstAsync(f => f.Id == Recurrent.Id);
 
             DebtAssert(request, entity);
             ItemAssert(request, entity);

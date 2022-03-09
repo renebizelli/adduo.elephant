@@ -45,7 +45,7 @@ namespace adduo.elephant.test.services.debts
             services.AddAutoMapper(typeof(domain.mappers.debts.DebtProfile));
             services.AddAutoMapper(typeof(domain.mappers.debts.items.ItemProfile));
             services.AddAutoMapper(typeof(domain.mappers.debts.items.ItemAmountProfile));
-            services.AddAutoMapper(typeof(domain.mappers.debts.bundler_items.ItemProfile));
+            services.AddAutoMapper(typeof(domain.mappers.debts.bundler_items.ItemBundlerProfile));
             services.AddAutoMapper(typeof(TProfile));
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -94,7 +94,7 @@ namespace adduo.elephant.test.services.debts
 
         public async Task ShoudUpdateEntityBase(string id, TUpdateRequest request)
         {
-            var repository = new DebtAccess<TEntity>(context);
+            var repository = new DebtRepository<TEntity>(context);
 
             var unitOfWork = new UnitOfWork(context);
 
@@ -120,12 +120,12 @@ namespace adduo.elephant.test.services.debts
             Assert.Equal(request.Amount.GetValue(), entity.Amount);
         }
 
-        protected void ItemAssert(domain.requests.debts.bundler_items.ItemRequest request, domain.entities.debts.bundler_items.Item entity)
+        protected void ItemAssert(domain.requests.debts.bundler_items.ItemBundlerRequest request, domain.entities.debts.bundler_items.ItemBundler entity)
         {
             Assert.Equal(request.BundlerMonthly.GetValue(), entity.BundlerMonthlyId);
         }
 
-        protected void ItemAmountAssert(domain.requests.debts.bundler_items.ItemAmountRequest request, domain.entities.debts.bundler_items.ItemAmount entity)
+        protected void ItemAmountAssert(domain.requests.debts.bundler_items.ItemAmountBundlerRequest request, domain.entities.debts.bundler_items.ItemAmountBundler entity)
         {
             Assert.Equal(request.Amount.GetValue(), entity.Amount);
         }

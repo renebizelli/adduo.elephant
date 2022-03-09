@@ -32,7 +32,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
         [Fact]
         public void InvalidRequest()
         {
-            var request = new InstallmentRequest();
+            var request = new InstallmentBundlerRequest();
 
             request.Validate();
 

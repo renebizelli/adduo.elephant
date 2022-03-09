@@ -6,9 +6,9 @@ namespace adduo.elephant.test
 {
     public class HelperDebtBundlerItemsTest
     {
-        public static InstallmentRequest CreateInstallmentRequest(string name, decimal value, int category, int startMonth, int startYear, int installments, Guid bundlerMonthly)
+        public static InstallmentBundlerRequest CreateInstallmentRequest(string name, decimal value, int category, int startMonth, int startYear, int installments, Guid bundlerMonthly)
         {
-            var request = new InstallmentRequest();
+            var request = new InstallmentBundlerRequest();
 
             request.StartMonth = new utilities.entries.MonthEntry { Value = startMonth.ToString() };
             request.StartYear = new utilities.entries.IntEntry { Value = startYear.ToString() };
@@ -21,9 +21,9 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static PontualRequest CreatePontualRequest(string name, decimal value, int category, int month, int year, Guid bundlerMonthly)
+        public static PontualBundlerRequest CreatePontualRequest(string name, decimal value, int category, int month, int year, Guid bundlerMonthly)
         {
-            var request = new PontualRequest();
+            var request = new PontualBundlerRequest();
 
             request.Month = new utilities.entries.MonthEntry { Value = month.ToString() };
             request.Year = new utilities.entries.IntEntry { Value = year.ToString() };
@@ -35,9 +35,9 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static MonthlyRequest CreateMonthlyRequest(string name, decimal value, int category, Guid bundlerMonthly)
+        public static MonthlyBundlerRequest CreateMonthlyRequest(string name, decimal value, int category, Guid bundlerMonthly)
         {
-            var request = new MonthlyRequest();
+            var request = new MonthlyBundlerRequest();
 
             SetDebt(request, name, category);
             SetItem(request, bundlerMonthly);
@@ -46,9 +46,9 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static RecurrentSaveRequest CreateRecurrentSaveRequest(string name, string description, decimal value, int category, Guid bundlerMonthly)
+        public static RecurrentBundlerSaveRequest CreateRecurrentSaveRequest(string name, string description, decimal value, int category, Guid bundlerMonthly)
         {
-            var request = new RecurrentSaveRequest();
+            var request = new RecurrentBundlerSaveRequest();
 
             request.Value.Value = value.ToString();
             request.Description.Value = description;
@@ -59,18 +59,18 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static RecurrentUpdateRequest CreateRecurrentUpdateRequest(string name, int category, Guid bundlerMonthly)
+        public static RecurrentBundlerUpdateRequest CreateRecurrentUpdateRequest(string name, int category, Guid bundlerMonthly)
         {
-            var request = new RecurrentUpdateRequest();
+            var request = new RecurrentBundlerUpdateRequest();
 
             SetDebt(request, name, category);
             SetItem(request, bundlerMonthly);
 
             return request;
         }
-        public static RecurrentValueRequest CreateRecurrentValueRequest(string description, decimal value)
+        public static RecurrentValueBundlerRequest CreateRecurrentValueRequest(string description, decimal value)
         {
-            var request = new RecurrentValueRequest();
+            var request = new RecurrentValueBundlerRequest();
 
             request.Description.Value = description;
             request.Amount.Value = value.ToString();
@@ -78,9 +78,9 @@ namespace adduo.elephant.test
             return request;
         }
 
-        public static YearlyRequest CreateYearlyRequest(string name, decimal value, int category, int dueMonth, Guid bundlerMonthly)
+        public static YearlyBundlerRequest CreateYearlyRequest(string name, decimal value, int category, int dueMonth, Guid bundlerMonthly)
         {
-            var request = new YearlyRequest();
+            var request = new YearlyBundlerRequest();
 
             request.DueMonth = new utilities.entries.MonthEntry { Value = dueMonth.ToString() };
 
@@ -92,12 +92,12 @@ namespace adduo.elephant.test
         }
 
 
-        private static void SetItem(ItemRequest request, Guid bundlerMonthly)
+        private static void SetItem(ItemBundlerRequest request, Guid bundlerMonthly)
         {
             request.BundlerMonthly = new utilities.entries.GuidEntry() { Value = bundlerMonthly.ToString() };
         }
 
-        private static void SetItemAmount(ItemAmountRequest request, decimal value)
+        private static void SetItemAmount(ItemAmountBundlerRequest request, decimal value)
         {
             request.Amount = new utilities.entries.DecimalEntry { Value = value.ToString() };
         }

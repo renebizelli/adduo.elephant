@@ -10,12 +10,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services.debts.items
 {
-    public class MonthlyBundlerServiceTest : DebtServiceTest<MonthlyBundlerRequest, MonthlyBundler, MonthlyBundlerProfile>
+    public class MonthlyBundlerServiceTest : DebtServiceTest<BundlerMonthlyRequest, BundlerMonthly, BundlerMonthlyProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<MonthlyBundlerRequest>();
+            var request = new Mock<BundlerMonthlyRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
@@ -24,7 +24,7 @@ namespace adduo.elephant.test.services.debts.items
         [Fact]
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
-            var request = new Mock<MonthlyBundlerRequest>();
+            var request = new Mock<BundlerMonthlyRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
@@ -34,7 +34,7 @@ namespace adduo.elephant.test.services.debts.items
         [Fact]
         public async Task ShoudUpdateEntity()
         {
-            var monthlyBundler = await context.Set<MonthlyBundler>().FirstAsync();
+            var monthlyBundler = await context.Set<BundlerMonthly>().FirstAsync();
 
             var request = HelperDebtItemsTest.CreateMonthlyBundlerRequest(
                 "Teste trocado",
@@ -44,7 +44,7 @@ namespace adduo.elephant.test.services.debts.items
 
             await base.ShoudUpdateEntityBase(monthlyBundler.Id.ToString(), request);
 
-            var entity = await context.Set<MonthlyBundler>().Include(i => i.Category).FirstAsync(f => f.Id == monthlyBundler.Id);
+            var entity = await context.Set<BundlerMonthly>().Include(i => i.Category).FirstAsync(f => f.Id == monthlyBundler.Id);
 
             DebtAssert(request, entity);
             ItemAssert(request, entity);

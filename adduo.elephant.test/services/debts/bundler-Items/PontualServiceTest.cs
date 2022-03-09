@@ -11,12 +11,12 @@ using Xunit;
 
 namespace adduo.elephant.test.services.debts.bundler_items
 {
-    public class PontualServiceTest : DebtServiceTest<PontualRequest, Pontual, PontualProfile>
+    public class PontualServiceTest : DebtServiceTest<PontualBundlerRequest, PontualBundler, PontualBundlerProfile>
     {
         [Fact]
         public async Task ShoudCallMethodsWhenCallSave()
         {
-            var request = new Mock<PontualRequest>();
+            var request = new Mock<PontualBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallSaveBase(request);
@@ -25,7 +25,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudCallMethodsWhenCallUpdate()
         {
-            var request = new Mock<PontualRequest>();
+            var request = new Mock<PontualBundlerRequest>();
             request.Object.CategoryId = new utilities.entries.IntEntry();
 
             await base.ShoudCallMethodsWhenCallUpdateBase(Guid.NewGuid().ToString(), request);
@@ -34,7 +34,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
         [Fact]
         public async Task ShoudUpdateEntity()
         {
-            var Pontual = await context.Set<Pontual>().FirstAsync();
+            var Pontual = await context.Set<PontualBundler>().FirstAsync();
 
             var request = HelperDebtBundlerItemsTest.CreatePontualRequest(
                 "Teste trocado",
@@ -46,7 +46,7 @@ namespace adduo.elephant.test.services.debts.bundler_items
 
             await base.ShoudUpdateEntityBase(Pontual.Id.ToString(), request);
 
-            var entity = await context.Set<Pontual>().Include(i => i.Category).FirstAsync(f => f.Id == Pontual.Id);
+            var entity = await context.Set<PontualBundler>().Include(i => i.Category).FirstAsync(f => f.Id == Pontual.Id);
 
             Assert.Equal(request.Month.GetValue(), entity.Month);
             Assert.Equal(request.Year.GetValue(), entity.Year);

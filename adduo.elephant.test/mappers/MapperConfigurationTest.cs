@@ -19,17 +19,19 @@ namespace adduo.elephant.test.mappers
                 cfg.AddProfile(new domain.mappers.debts.items.MonthlyProfile());
                 cfg.AddProfile(new domain.mappers.debts.items.YearlyProfile());
                 cfg.AddProfile(new domain.mappers.debts.items.InstallmentProfile());
-                cfg.AddProfile(new domain.mappers.debts.items.MonthlyBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.items.BundlerMonthlyProfile());
 
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemAmountProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.PontualProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.InstallmentProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.MonthlyProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.YearlyProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentSaveProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentUpdateProfile());
-                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentValueProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.ItemAmountBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.PontualBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.InstallmentBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.MonthlyBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.YearlyBundlerProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentBundlerSaveProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentBundlerUpdateProfile());
+                cfg.AddProfile(new domain.mappers.debts.bundler_items.RecurrentValueBundlerProfile());
+
+                cfg.AddProfile(new domain.mappers.SpreadSheetProfile());
             });
         }
 

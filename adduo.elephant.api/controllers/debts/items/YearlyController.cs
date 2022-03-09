@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace adduo.elephant.api.controllers.debts.items
 {
     [Route("v{version:apiVersion}/debts/yearly")]
-    [ApiController]
     public class YearlyController : DebtController<YearlyRequest, Yearly>
     {
         public YearlyController(IDebtService<YearlyRequest, Yearly> service) : base(service)

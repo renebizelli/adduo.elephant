@@ -20,10 +20,10 @@ namespace adduo.elephant.repositories
         public virtual DbSet<domain.entities.debts.items.Installment> Installments { get; set; }
 
         //public virtual DbSet<domain.entities.debts.bundler_items.Item> ItemBundlers { get; set; }
-        public virtual DbSet<domain.entities.debts.bundler_items.Pontual> PontualBundlers { get; set; }
-        public virtual DbSet<domain.entities.debts.bundler_items.Monthly> MonthlyBundlers { get; set; }
-        public virtual DbSet<domain.entities.debts.bundler_items.Yearly> YearlyBundlers { get; set; }
-        public virtual DbSet<domain.entities.debts.bundler_items.Installment> InstallmentBundlers { get; set; }
+        public virtual DbSet<domain.entities.debts.bundler_items.PontualBundler> PontualBundlers { get; set; }
+        public virtual DbSet<domain.entities.debts.bundler_items.MonthlyBundler> MonthlyBundlers { get; set; }
+        public virtual DbSet<domain.entities.debts.bundler_items.YearlyBundler> YearlyBundlers { get; set; }
+        public virtual DbSet<domain.entities.debts.bundler_items.InstallmentBundler> InstallmentBundlers { get; set; }
         public virtual DbSet<SpreadSheet> SpreadSheets { get; set; }
 
         public ElephantContext()

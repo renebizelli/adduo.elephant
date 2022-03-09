@@ -12,9 +12,9 @@ namespace adduo.elephant.repositories.configurations
 
             base.Configure(builder);
 
-            builder.HasMany(m => m.Debts)
-                .WithOne(o => o.Category)
-                .HasForeignKey(f => f.CategoryId);
+            //builder.HasMany(m => m.Debts)
+            //    .WithOne(o => o.Category)
+            //    .HasForeignKey(f => f.CategoryId);
         }
     }
 }

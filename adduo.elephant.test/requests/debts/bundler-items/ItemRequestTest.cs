@@ -14,13 +14,13 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             Assert.Equal(utilities.entries.StatusCode.VALID, request.CategoryId.Status);
         }
 
-        public void ShouldBeOkAndValidStatusItem(ItemRequest request)
+        public void ShouldBeOkAndValidStatusItem(ItemBundlerRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
             Assert.Equal(utilities.entries.StatusCode.VALID, request.BundlerMonthly.Status);
         }
 
-        public void ShouldBeOkAndValidStatusItemAmountRequest(ItemAmountRequest request)
+        public void ShouldBeOkAndValidStatusItemAmountRequest(ItemAmountBundlerRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.OK, request.HttpStatusCode);
             Assert.Equal(utilities.entries.StatusCode.VALID, request.Amount.Status);
@@ -34,7 +34,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
             Assert.Equal(utilities.entries.StatusCode.INVALID, request.CategoryId.Status);
         }
 
-        public void ShouldBeBadRequestAndInvalidStatusItemRequest(ItemRequest request)
+        public void ShouldBeBadRequestAndInvalidStatusItemRequest(ItemBundlerRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
             Assert.Equal(utilities.entries.StatusCode.INVALID, request.BundlerMonthly.Status);
@@ -42,7 +42,7 @@ namespace adduo.elephant.test.requests.debts.bundler_items
 
 
 
-        public void ShouldBeBadRequestAndInvalidStatusItemAmountRequest(ItemAmountRequest request)
+        public void ShouldBeBadRequestAndInvalidStatusItemAmountRequest(ItemAmountBundlerRequest request)
         {
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, request.HttpStatusCode);
             Assert.Equal(utilities.entries.StatusCode.INVALID, request.Amount.Status);

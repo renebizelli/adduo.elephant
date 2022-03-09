@@ -19,7 +19,7 @@ namespace adduo.elephant.api.controllers.debts
 
     [ApiController]
     [ApiVersion("1.0")]
-    public class DebtController<TSaveRequest, TUpdateRequest, TEntity> : ControllerBase 
+    public class DebtController<TSaveRequest, TUpdateRequest, TEntity> : BaseController
         where TSaveRequest : DebtRequest
         where TUpdateRequest : DebtRequest
         where TEntity : Debt
