@@ -1,12 +1,16 @@
-﻿using System;
+﻿using adduo.elephant.domain.contracts.entities;
+using adduo.elephant.domain.extensions;
+using System;
 
 namespace adduo.elephant.domain.entities.debts.items
 {
-    public class Installment : ItemAmount
+    public class Installment : ItemAmount, IInstallment
     {
         public int StartMonth { get; private set; }
         public int StartYear { get; private set; }
         public int Installments { get; private set; }
+        public int StartPeriod { get; private set; }
+        public int FinishPeriod { get; private set; }
 
         public Installment()
         {
@@ -19,6 +23,11 @@ namespace adduo.elephant.domain.entities.debts.items
             StartYear = startYear;
             Installments = installments;
         }
-            
+
+        public void SetPeriod()
+        {
+            StartPeriod = this.GetStartPeriod();
+            FinishPeriod = this.GetFinishPeriod();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using adduo.elephant.domain.contracts.services.queries;
 using adduo.elephant.domain.entities.debts.items;
 using adduo.elephant.domain.requests;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
 

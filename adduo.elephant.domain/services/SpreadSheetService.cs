@@ -75,9 +75,9 @@ namespace adduo.elephant.domain.services
             var installments = await installmentQuery.Get(period);
             AddItems<Installment>(spreadsheet, installments);
 
-            await repository.SaveAsync(spreadsheet);
+            //await repository.SaveAsync(spreadsheet);
 
-            await unitOfWork.CommitAsync();
+            //await unitOfWork.CommitAsync();
 
             return spreadsheet;
         }

@@ -24,7 +24,7 @@ namespace adduo.elephant.test.services.scenarios
             var yearly = new domain.entities.debts.items.Yearly(Guid.NewGuid(), "Teste", 10, 1, 2, 3);
             SetMockDbSet<domain.entities.debts.items.Yearly, Guid>(yearly);
 
-            var installmentBundler = new domain.entities.debts.bundler_items.InstallmentBundler(Guid.NewGuid(), "Teste", 100, Guid.NewGuid());
+            var installmentBundler = new domain.entities.debts.bundler_items.InstallmentBundler(Guid.NewGuid(), "Teste", 100, Guid.NewGuid(), 1, 2021, 2);
             SetMockDbSet<domain.entities.debts.bundler_items.InstallmentBundler, Guid>(installmentBundler);
 
             var bundlerMonthly = new domain.entities.debts.bundler_items.MonthlyBundler(Guid.NewGuid(), "Teste", 10, Guid.NewGuid());

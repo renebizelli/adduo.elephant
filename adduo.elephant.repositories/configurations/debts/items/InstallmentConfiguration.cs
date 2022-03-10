@@ -13,6 +13,8 @@ namespace adduo.elephant.repositories.configurations.debts.items
             builder.Property(p => p.StartMonth).IsRequired();
             builder.Property(p => p.StartYear).IsRequired();
             builder.Property(p => p.Installments).IsRequired();
+            builder.Property(p => p.StartPeriod).IsRequired();
+            builder.Property(p => p.FinishPeriod).IsRequired();
         }
     }
 }
