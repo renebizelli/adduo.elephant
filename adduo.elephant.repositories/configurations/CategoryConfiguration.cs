@@ -11,10 +11,6 @@ namespace adduo.elephant.repositories.configurations
             SetTableName("categories");
 
             base.Configure(builder);
-
-            //builder.HasMany(m => m.Debts)
-            //    .WithOne(o => o.Category)
-            //    .HasForeignKey(f => f.CategoryId);
         }
     }
 }

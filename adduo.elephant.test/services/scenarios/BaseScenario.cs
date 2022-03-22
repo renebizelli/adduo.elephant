@@ -1,5 +1,5 @@
 ﻿using adduo.elephant.domain.entities;
-using adduo.elephant.domain.entities.debts;
+using adduo.elephant.domain.entities.debts_template;
 using adduo.elephant.repositories;
 using Microsoft.EntityFrameworkCore;
 using Moq;

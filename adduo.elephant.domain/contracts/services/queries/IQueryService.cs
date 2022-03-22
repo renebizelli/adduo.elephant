@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace adduo.elephant.domain.contracts.services.queries
 {
     public interface IQueryService<TEntity>
-        where TEntity : domain.entities.debts.Debt
+        where TEntity : domain.entities.debts_template.DebtTemplate
     {
         Task<List<TEntity>> Get(PeriodRequest period);
     }

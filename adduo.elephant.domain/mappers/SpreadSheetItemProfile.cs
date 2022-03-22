@@ -6,7 +6,7 @@ namespace adduo.elephant.domain.mappers
     {
         public SpreadSheetItemProfile()
         {
-            CreateMap<entities.SpreadSheetItem, dtos.SpreadSheetItem>();
+            //CreateMap<entities.SpreadSheetItem, dtos.SpreadSheetItem>();
         }
     }
 }

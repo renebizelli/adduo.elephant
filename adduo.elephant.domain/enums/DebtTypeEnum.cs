@@ -2,10 +2,11 @@
 {
     public enum DebtType
     {
+        bundlerMonthly,
         installment,
-        monthlyBundler,
         monthly,
         pontual,
+        recurrent,
         yearly
     }
 }

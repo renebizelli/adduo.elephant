@@ -17,8 +17,6 @@
 
   <ItemGroup>
     <Folder Include="exceptions\" />
-    <Folder Include="mappers\resolvers\" />
-    <Folder Include="services\queries\bundler\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using adduo.elephant.domain.entities.debts;
+﻿using adduo.elephant.domain.entities.debts_template;
 using System.Collections.Generic;
 
 namespace adduo.elephant.domain.entities

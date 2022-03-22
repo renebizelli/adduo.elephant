@@ -24,11 +24,11 @@ namespace adduo.elephant.api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-              .AddControllers()
-                 .AddJsonOptions(options =>
-                 {
-                     options.JsonSerializerOptions.Converters.Add(new AsRuntimeTypeConverter<domain.dtos.debts.Debt>());
-                 });
+              .AddControllers();
+                 //.AddJsonOptions(options =>
+                 //{
+                 //    options.JsonSerializerOptions.Converters.Add(new AsRuntimeTypeConverter<domain.dtos.debts.Debt>());
+                 //});
 
             services.AddApiVersion();
 

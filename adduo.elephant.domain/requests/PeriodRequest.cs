@@ -22,5 +22,6 @@ namespace adduo.elephant.domain.requests
                 throw new ArgumentException($"Invalid period: {Year}/{Month}");
             }
         }
+
     }
 }

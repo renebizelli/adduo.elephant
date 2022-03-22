@@ -1,7 +1,4 @@
-﻿using adduo.elephant.domain.entities.debts.items;
-using System.Collections.Generic;
-
-namespace adduo.elephant.domain.entities
+﻿namespace adduo.elephant.domain.entities
 {
     public class InCome : EntityItem<int>
     {
@@ -12,7 +9,5 @@ namespace adduo.elephant.domain.entities
         public InCome(int id) : base(id)
         {
         }
-
-
     }
 }

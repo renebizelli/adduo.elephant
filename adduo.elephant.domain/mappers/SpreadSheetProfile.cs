@@ -15,7 +15,6 @@ namespace adduo.elephant.domain.mappers
                 .ForMember(d => d.CreatedAt, src => src.MapFrom(m => m.CreatedAt))
                 .AfterMap((source, dest, context) => {
 
-                    dest.Items = context.Mapper.Map<List<dtos.SpreadSheetItem>>(source.Items);
                 });
         }
     }
